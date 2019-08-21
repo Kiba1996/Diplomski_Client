@@ -1,0 +1,89 @@
+<div class="container" style="width: 700px; text-align: center; ">
+
+    <form [formGroup]="registerForm" (ngSubmit)="Button1()">
+      <fieldset class="ff">
+        <legend style="font-family: 'Gill Sans'; color: #5bd6cc; font-size: 40px; width:auto"> |  Register as admin/controller  | </legend>
+     
+        <div class="form-group">
+          <label class="lab">Choose role: </label>
+          <select class="form-control" name="Role" [value]="Admin" formControlName="Role">
+            <option  value="Admin" >Admin</option>
+            <option  value="Controller" >Controller</option>
+          </select>
+        </div>
+          <div class="form-group">
+            <label class="lab" for="Email">Email address:</label>
+            <input required type="email" class="form-control" name="Email" placeholder="Email" id="Email" formControlName="Email">
+            <div *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)" class="alert alert-danger">
+              <ng-container *ngIf="f.Email.errors.required">
+                <p>Email is required.</p>
+              </ng-container>
+              <ng-container *ngIf="f.Email.errors.email">
+                <p>Please enter valid email! Example: name@gmail.com</p>
+              </ng-container>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label class="lab" for="Name">Name:</label>
+            <input required type="text" class="form-control" name="Name" placeholder="Name" id="Name" formControlName="Name">
+            <div *ngIf="f.Name.invalid && (f.Name.dirty || f.Name.touched)" class="alert alert-danger">
+              <ng-container *ngIf="f.Name.errors.required">
+                <p>Name is required.</p>
+              </ng-container>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label class="lab" for="surname">Surname:</label>
+            <input required type="text" class="form-control" name="Surname" placeholder="Surname" id="Surname" formControlName="Surname">
+            <div *ngIf="f.Surname.invalid && (f.Surname.dirty || f.Surname.touched)" class="alert alert-danger">
+              <ng-container *ngIf="f.Surname.errors.required">
+                <p>Surname is required.</p>
+              </ng-container>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label class="lab" for="Address">Address:</label>
+            <input required type="text" class="form-control" name="Address" placeholder="Address" id="Address" formControlName="Address">
+            <div *ngIf="f.Address.invalid && (f.Address.dirty || f.Address.touched)" class="alert alert-danger">
+              <ng-container *ngIf="f.Address.errors.required">
+                <p>Address is required.</p>
+              </ng-container>
+            </div>
+          </div>
+       
+          <div class="form-group">
+            <label class="lab" for="birthday">Birthday:</label>
+            <input required type="date" class="form-control" name="Birthday" placeholder="dd/mm/yyyy" id="Birthday" formControlName="Birthday">
+          </div>
+  
+          <div class="form-group">
+            <label class="lab" for="password">Password:</label>
+            <input required type="password" class="form-control" name="Password"  placeholder="Password"  formControlName="Password">
+            <div *ngIf="f.Password.invalid && (f.Password.dirty || f.Password.touched)" class="alert alert-danger">
+              <ng-container *ngIf="f.Password.errors.required">
+                <p>Password is required.</p>
+              </ng-container>
+              <ng-container *ngIf="f.Password.errors.minlength">
+                <p>Password must be at least 6 characters long.</p>
+              </ng-container>
+              <ng-container *ngIf="f.Password.errors.pattern">
+                <p>Passwords must have at least one non letter or digit character. Passwords must have at least one digit ('0'-'9'). Passwords must have at least one uppercase ('A'-'Z').</p>
+              </ng-container>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label class="lab" for="confirmPassword">Confirm password:</label>
+            <input required type="password" class="form-control" name="ConfirmPassword" placeholder="Confirm password" formControlName="ConfirmPassword">
+            <div *ngIf="registerForm.errors?.doesntMatch && (f.ConfirmPassword.dirty || f.ConfirmPassword.touched)" class="alert alert-danger">
+              <p>Doesnt match with password.</p>
+            </div>
+          </div>
+          <br/>
+          <button  type="submit" [disabled]="registerForm.invalid" class="btn btn-primary btn-lg" >Register</button>
+        </fieldset>
+      </form>
+  </div> 

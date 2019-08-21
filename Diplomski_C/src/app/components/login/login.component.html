@@ -1,0 +1,54 @@
+<!-- <div class="container">
+
+    <div class="row">
+      
+      <div class="col-md-6">
+  
+        <h1 class="form-signin-heading">Sign in</h1>
+        <p class="lead">Not a member? Please <a routerLink="/register">register</a> instead.</p>
+    
+        <form (submit)="login()">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+          </div>
+          <button type="submit" class="btn btn-default">Sign in!</button>
+        </form>
+  
+      </div>
+    </div>
+  
+  </div>
+   -->
+
+  <div class="container" style=" width: 700px; text-align: center;">
+    <br/>
+    <br/>
+    <form #loginForm="ngForm" (ngSubmit)="onSignIn(loginForm.value, loginForm)">
+        <fieldset class="ff">
+            <legend style="font-family: 'Gill Sans'; color: #5bd6cc; font-size: 40px; width:auto"> |  Sign In  | </legend>
+      <br/>
+        <div class="form-group">
+          <!-- <label for="email">Email address</label> -->
+          <input required type="email" class="form-control" name="Email" placeholder="Email" ngModel>
+          <!-- <div *ngIf="!validations.emailOk" style="color:red">Email can't be empty.</div> -->
+  
+        </div>
+  
+       <br/>
+        <div class="form-group">
+          <!-- <label for="password">Password</label> -->
+          <input required type="password" class="form-control" name="Password" placeholder="Password" ngModel>
+          <!-- <div *ngIf="!validations.passwordOk" style="color:red">Password can't be empty.</div> -->
+  
+        </div>
+  
+      
+        <button  type="submit" class="btn btn-primary btn-lg">Sign In</button>
+      </fieldset>
+      </form>
+  </div>

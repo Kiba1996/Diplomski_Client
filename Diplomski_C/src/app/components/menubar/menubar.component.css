@@ -1,0 +1,17 @@
+.navbar-custom .navbar-links-custom li {
+    padding: 0 5px 0 15px;
+    position:relative;
+  }
+
+  .navbar-custom .navbar-links-custom li:before{
+    content: " | ";;
+  position: absolute;
+  left:0;
+  top:10px;
+}
+
+
+
+.btn:hover {
+    color: black;
+}

@@ -1,0 +1,160 @@
+<!-- <div class="container">
+
+    <div class="row">
+      <div class="col-md-6">
+        <h1>Register</h1>
+        <p class="lead">Already a member? Please <a routerLink="/login">log in</a> instead.</p>
+        <form (submit)="register()">
+          <div class="form-group">
+            <label for="name">Full name</label>
+            <input type="text" class="form-control" name="name" placeholder="Enter your name" [(ngModel)]="credentials.name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+          </div>
+
+          <div class="form-group">
+            <label for="surname">Surname</label>
+            <input type="text" class="form-control" name="surname" placeholder="Enter your surname" [(ngModel)]="credentials.surname">
+          </div>
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" name="address" placeholder="Enter address" [(ngModel)]="credentials.address">
+          </div>
+          <div class="form-group">
+            <label for="birthday">Birthday</label>
+            <input type="date" class="form-control" name="birthday" placeholder="birthday" [(ngModel)]="credentials.birthday">
+          </div>
+
+
+          <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" class="form-control" name="image"  >
+          </div>
+         
+          <div class="form-group">
+            <label for="role">Role</label>
+            <input type="string" class="form-control" name="role" placeholder="role" [(ngModel)]="credentials.role">
+          </div>
+
+          <button type="submit" class="btn btn-default">Register!</button>
+        </form>
+      </div>
+    </div>
+  
+  </div> -->
+
+
+
+  <div class="container" style="width: 700px; text-align: center; ">
+  
+    <label style="font-family: 'Gill Sans'; color:white">Do you want to register as admin or controller?</label><a [routerLink]="['/regAdminController']">Click here</a>
+  
+    <form [formGroup]="registerForm" (ngSubmit)="Button()">
+      <br/>
+      <fieldset class="ff">
+        <legend style="font-family: 'Gill Sans'; color: #5bd6cc; font-size: 40px; width:auto"> |  Register  | </legend>
+  
+        <label class="lab">Passenger type:</label>
+        <select class="form-control" name="PassengerType" [value]="Regular" formControlName="PassengerType">
+          <option *ngFor="let type of types" value="{{type.name}}" >{{type.name}}</option>
+        </select>
+          
+        <div class="form-group">
+          <label  class="lab" for="Email">Email address:</label>
+          <input required type="email" class="form-control " name="Email" placeholder="Email" id="Email" formControlName="Email">
+          <div *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)" class="alert alert-danger">
+            <ng-container *ngIf="f.Email.errors.required">
+              <p>Email is required.</p>
+            </ng-container>
+            <ng-container *ngIf="f.Email.errors.email">
+              <p>Please enter valid email! Example: name@gmail.com</p>
+            </ng-container>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label  class="lab" for="Name">Name:</label>
+          <input required type="text" class="form-control" name="Name" placeholder="Name" id="Name" formControlName="Name">
+          <div *ngIf="f.Name.invalid && (f.Name.dirty || f.Name.touched)" class="alert alert-danger">
+            <ng-container *ngIf="f.Name.errors.required">
+              <p>Name is required.</p>
+            </ng-container>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label  class="lab" for="surname">Surname:</label>
+          <input required type="text" class="form-control" name="Surname" placeholder="Surname" id="Surname" formControlName="Surname">
+          <div *ngIf="f.Surname.invalid && (f.Surname.dirty || f.Surname.touched)" class="alert alert-danger">
+            <ng-container *ngIf="f.Surname.errors.required">
+              <p>Surname is required.</p>
+            </ng-container>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label  class="lab" for="Address">Address:</label>
+          <input required type="text" class="form-control" name="Address" placeholder="Address" id="Address" formControlName="Address">
+          <div *ngIf="f.Address.invalid && (f.Address.dirty || f.Address.touched)" class="alert alert-danger">
+            <ng-container *ngIf="f.Address.errors.required">
+              <p>Address is required.</p>
+            </ng-container>
+          </div>
+        </div>
+       
+        <div class="form-group">
+          <label  class="lab" for="birthday">Birthday:</label>
+          <input required type="date" class="form-control" name="Birthday" placeholder="dd/mm/yyyy" id="Birthday" formControlName="Birthday">
+        </div>
+  
+        <div class="form-group">
+          <label  class="lab" for="password">Password:</label>
+          <input required type="password" class="form-control" name="Password"  placeholder="Password"  formControlName="Password">
+          <div *ngIf="f.Password.invalid && (f.Password.dirty || f.Password.touched)" class="alert alert-danger">
+            <ng-container *ngIf="f.Password.errors.required">
+              Password is required.
+            </ng-container>
+            <ng-container *ngIf="f.Password.errors.minlength">
+              <p>Password must be at least 6 characters long.</p>
+            </ng-container>
+            <ng-container *ngIf="f.Password.errors.pattern">
+              <p>Passwords must have at least one non letter or digit character. Passwords must have at least one digit ('0'-'9'). Passwords must have at least one uppercase ('A'-'Z').</p>
+            </ng-container>
+          </div>
+        </div>
+  
+        <div class="form-group">
+            <label  class="lab" for="confirmPassword">Confirm password:</label>
+            <input required type="password" class="form-control" name="ConfirmPassword" placeholder="Confirm password" formControlName="ConfirmPassword">
+            <div *ngIf="registerForm.errors?.doesntMatch && (f.ConfirmPassword.dirty || f.ConfirmPassword.touched)" class="alert alert-danger">
+              <p>Doesnt match with password.</p>
+            </div>
+        </div>
+  
+        <div *ngIf="registerForm.get('PassengerType').value != 'Regular'" class="form-group" >
+          <input  type="file" (change)="onFileSelected($event)" style="background-color: transparent; color:#5bd6cc; border:2px solid #5bd6cc" >  
+        </div>
+  
+        <!-- <div *ngIf="registerForm.get('PassengerType').value != 'Regular'" class="file-field form-group">
+            <a class="btn-floating peach-gradient mt-0 float-left">
+              <i class="fas fa-paperclip" aria-hidden="true"></i>
+              <input type="file" (change)="onFileSelected($event)">
+            </a>
+            
+        </div> -->
+  
+       
+  
+        <br/>
+        <button  type="submit" [disabled]="registerForm.invalid" class="btn btn-primary btn-lg" >Register</button>
+  
+        </fieldset>
+      </form>
+  </div> 
+  

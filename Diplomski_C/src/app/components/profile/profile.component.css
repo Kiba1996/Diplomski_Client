@@ -1,0 +1,28 @@
+.rounded {
+    border-radius: 20px;
+    
+  }
+  
+
+.naz {
+    color: #5bd6cc;
+    font-family: 'Gill Sans';
+    font-size: 30px;
+}
+.prof {
+    color: #b5dbd8;
+    font-family: 'Gill Sans';
+    font-size: 30px;
+}
+
+
+
+.glyphicon {  margin-bottom: 10px;margin-right: 10px;}
+
+small {
+display: block;
+line-height: 1.428571429;
+color: rgb(59, 65, 66);
+font-size: 30px; 
+font-family: 'Gill Sans';
+}
