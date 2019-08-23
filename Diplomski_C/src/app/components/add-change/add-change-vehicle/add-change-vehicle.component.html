@@ -1,1 +1,60 @@
-<p>add-change-vehicle works!</p>
+<!-- <div>
+    <label for="action">Choose action:</label>
+    <input  required type="radio" value="Add"  (click)="setradio('Add')"  name="Action"  ngModel>Add
+    <input required type="radio" value="Remove"  (click)="setradio('Remove')" name="Action"  ngModel> Remove
+  </div>  -->
+  <div class="container" style="text-align: center; width:70% ; align-items: center">
+    <br/>
+    <h2  style=" color: #d7dfde;">~ Add/Change vehicles ~</h2>
+  <br/>
+
+  <div class="btn-group btn-group-toggle" style="width: 60%" data-toggle="buttons">
+    <label for="option1" class="btn btn-primary active"  (click)="setradio('Add')" >
+      <input type="radio" name="options" id="option1" autocomplete="off"  > Add
+    </label>
+    <label for="option2" class="btn btn-primary"  (click)="setradio('Remove')" >
+      <input type="radio" name="options" id="option2" autocomplete="off" > Remove
+    </label>
+
+  </div>
+
+
+
+  <br/>
+  <!-- class="form-group " -->
+  <div class="row justify-content-center" style="width:100%; align-items: center; align-content: center;text-align: center;">
+    <div class="column justify-content-center" style="width:70%">
+        <form #stationForm="ngForm" (ngSubmit)="onSubmit(stationForm.value, stationForm)" >
+
+            <br/>
+                <div *ngIf="isSelected('Add')" class="form-group" >
+                  <br/>
+                  <label style="color:#d7dfde; font-size: 20px; padding-right: 8px; " for="Type">Vehicle type:</label>
+                  <select class="form-control" name="Type" [value]="Bus"  ngModel >
+                      <option  value="Bus" >Bus</option>
+                      <option value="Trolley car">Trolley car</option>
+                      <option value="Train">Train</option>
+                      <option value="Subway train">Subway train</option>
+                    </select>
+                  <!-- <input required type="text" class="form-control" name="Type" placeholder="Vehicle type"  ngModel> -->
+
+                </div>
+
+                <div *ngIf="isSelected('Remove')" class="form-group">
+                    <br/>
+                    <label style="color:#d7dfde; font-size: 20px; padding-right: 8px; "  for="Type">Available vehicles:</label>
+                    <select class="form-control" name="Id" [value] = 0  [(ngModel)] = 'idVozila'>
+                      <option value =0 >None</option>
+                        <option *ngFor="let ln of availableVehicles" value={{ln._id}}  >{{ln._id}} | {{ln.vehicleType}}</option>
+                    </select>
+
+                </div>
+               <br/>
+              <button type="submit" class="btn btn-primary btn-lg" *ngIf="isSelected('Add')">Add</button>
+              <button type="submit" class="btn btn-primary btn-lg" *ngIf="isSelected('Remove')">Remove</button>
+
+
+              </form>
+            </div>
+          </div>
+  </div>
