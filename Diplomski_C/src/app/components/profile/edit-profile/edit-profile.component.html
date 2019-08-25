@@ -7,27 +7,27 @@
     
             <div class="form-group">
               <label class="lab" for="email">Email address:</label>
-              <input required type="email" class="form-control" name="Email" placeholder="Email"  [(ngModel)]="user.Email">
+              <input required type="email" class="form-control" name="Email" placeholder="Email"  [(ngModel)]="user.email">
             </div>
   
             <div class="form-group">
               <label class="lab" for="name">Name:</label>
-              <input required type="text" class="form-control" name="Name" placeholder="Name" [(ngModel)]="user.Name">
+              <input required type="text" class="form-control" name="Name" placeholder="Name" [(ngModel)]="user.name">
             </div>
   
             <div class="form-group">
               <label class="lab" for="surname">Surname:</label>
-              <input required type="text" class="form-control" name="Surname" placeholder="Surname" [(ngModel)]="user.Surname">
+              <input required type="text" class="form-control" name="Surname" placeholder="Surname" [(ngModel)]="user.surname">
             </div>
   
             <div class="form-group">
               <label class="lab" for="address">Address:</label>
-              <input required type="text" class="form-control" name="Address" placeholder="Address" [(ngModel)]="user.Address">
+              <input required type="text" class="form-control" name="Address" placeholder="Address" [(ngModel)]="user.address">
             </div>
        
             <div class="form-group">
               <label class="lab" for="birthday">Birthday:</label>
-              <input required type="date" class="form-control" name="Birthday" placeholder="dd/mm/yyyy" [(ngModel)]="user.Birthday">
+              <input required type="date" class="form-control" name="Birthday" placeholder="dd/mm/yyyy" [(ngModel)]="user.birthday">
             </div>
   
             <div *ngIf="!user.Image && user.Role=='AppUser' && user.PassengerTypeId != 3">

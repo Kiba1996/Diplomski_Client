@@ -1,1 +1,60 @@
-<p>pricelist works!</p>
+<div class="container" style="text-align: center; width:70% ;">
+
+  
+    <div *ngIf="validPrices">
+  
+        <br/>
+        <h2  style=" color: #d7dfde;">~ Pricelist ~</h2>
+        <br/>
+      
+        <label style="font-size: 20px; color:#5bd6cc">The price list is valid from  <b>{{pocDatum}}</b>  till  <b>{{endDatum}}</b></label>
+        <br/>
+        <br/>
+  
+      <table class = "table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Type</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope = "row">1</th>
+            <td>Hourly</td>
+            <td>{{validPrices.Hourly}}</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Daily</td>
+            <td>{{validPrices.Daily}}</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Monthly</td>
+            <td>{{validPrices.Monthly}}</td>
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <td>Yearly</td>
+            <td>{{validPrices.Yearly}}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      
+        <!-- <label>Hourly ticket:</label>
+        <label>{{validPrices.Hourly}}</label> <br/>
+        <label>Daily ticket:</label>
+        <label>{{validPrices.Daily}}</label> <br/>
+        <label>Monthly ticket:</label>
+        <label>{{validPrices.Monthly}}</label> <br/>
+        <label>Yearly ticket:</label>
+        <label>{{validPrices.Yearly}}</label> <br/> -->
+        
+      </div>
+    </div>
+   
+  
+  

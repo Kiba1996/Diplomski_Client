@@ -40,7 +40,8 @@ endDatum: string = "";
         this.refresh();
       },
       err => {
-        window.alert(err.error);
+        window.alert(err.error.message);
+        
         this.refresh();
       });
 
@@ -77,33 +78,45 @@ endDatum: string = "";
       if(this.priceList)
       {
         console.log(data);
-        let d : Date = new Date(this.priceList.StartOfValidity);
+        let d : Date = new Date(this.priceList.startOfValidity);
         this.pocDatum = d.getDate().toString()+ "." + (d.getMonth() + 1).toString() + "." + d.getFullYear().toString() + ".";
-        let e: Date = new Date(this.priceList.EndOfValidity);
+        let e: Date = new Date(this.priceList.endOfValidity);
         this.endDatum = e.getDate().toString() + "." + (e.getMonth() + 1).toString() + "." + e.getFullYear().toString() + ".";
         this.validPrices = new TicketPricesPomModel(0,0,0,0,0,new PriceListModel(null,null,0, []))
       }
        
        if(this.priceList){
-       this.priceList.TicketPricess.forEach(element => {
-        if(element.TicketTypeId == 2)
-        {
-          this.validPrices.Daily = element.Price;
-        }
-        if(element.TicketTypeId == 1)
-        {
-          this.validPrices.Hourly = element.Price;
-        }
-        if(element.TicketTypeId == 3)
-        {
-          this.validPrices.Monthly = element.Price;
-        }
-        if(element.TicketTypeId == 4)
-        {
-          this.validPrices.Yearly = element.Price;
-        }
+         let ticketPrices: any[] = [];
+         this.pricelistServ.getTicketPrices(this.priceList._id).subscribe(data =>{
+            ticketPrices = data;
+            console.log(data);
+            this.validPrices.Hourly = ticketPrices[0].price;
+            this.validPrices.Daily = ticketPrices[1].price;
+            this.validPrices.Monthly = ticketPrices[2].price;
+            this.validPrices.Yearly = ticketPrices[3].price;
+         });
+
         
-      });
+      //  this.priceList.TicketPricess.forEach(element => {
+        
+      //   if(element.TicketTypeId == 2)
+      //   {
+      //     this.validPrices.Daily = element.Price;
+      //   }
+      //   if(element.TicketTypeId == 1)
+      //   {
+      //     this.validPrices.Hourly = element.Price;
+      //   }
+      //   if(element.TicketTypeId == 3)
+      //   {
+      //     this.validPrices.Monthly = element.Price;
+      //   }
+      //   if(element.TicketTypeId == 4)
+      //   {
+      //     this.validPrices.Yearly = element.Price;
+      //   }
+        
+      // });
     }
     else {
       this.validPrices = new TicketPricesPomModel(0,0,0,0,0,new PriceListModel(null,null,0, []));

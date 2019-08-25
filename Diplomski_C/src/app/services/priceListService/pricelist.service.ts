@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 //import { Http } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PriceListModel } from 'src/app/model/pricelistModel';
 import { TicketPricesPomModel } from 'src/app/model/ticketPricesPomModel';
@@ -12,7 +12,7 @@ export class PricelistServiceService {
   private token: string;
   base_url = "http://localhost:52295"
   constructor( private httpClient:HttpClient) { } //private http: Http,
-  private request(method: 'post'|'get', type: 'addPricelist'|'getPricelist'|'getPricelistLast', user?: TicketPricesPomModel, stId?: String): Observable<any> {
+  private request(method: 'post'|'get', type: 'addPricelist'|'getPricelist'|'getPricelistLast' | 'getTicketPrices', user?: TicketPricesPomModel,  id?:any): Observable<any> {
     let base;
 
     if (method === 'post') {
@@ -21,10 +21,16 @@ export class PricelistServiceService {
       //   base=this.httpClient.post(`/api/${type}/`+stId, user);
       // }
     } else if(method === 'get') {
+     if(type ==='getTicketPrices'){
+    
+      base =  this.httpClient.get(`/api/${type}`, {headers: { Authorization: `Bearer ${this.getToken()}` },params: {ids:id}});
+     } 
+      else{
       base = this.httpClient.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+     } 
     }
     else {
-      base= this.httpClient.delete(`/api/${type}/`+ stId);
+      //base= this.httpClient.delete(`/api/${type}/`+ stId);
     }
 
     // const request = base.pipe(
@@ -51,6 +57,9 @@ export class PricelistServiceService {
 
   public addPricelist(stat: TicketPricesPomModel): Observable<any> {
     return this.request('post', 'addPricelist', stat);
+  }
+  public getTicketPrices(id: any): Observable<any>{
+    return this.request('get','getTicketPrices',null,id);
   }
 
   // public changePricelist(stat: PriceListModel,id: String) : Observable<any>{

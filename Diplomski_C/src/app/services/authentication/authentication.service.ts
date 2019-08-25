@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TokenPayload } from 'src/app/model/tokenPayload';
+import { RegModel } from 'src/app/model/regModel';
 
 
 export interface UserDetails {
@@ -82,11 +83,14 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: TokenPayload): Observable<any> {
+  private request(method: 'post'|'get', type: 'login'|'register'|'profile'|'edit', user?: TokenPayload, u?:RegModel): Observable<any> {
     let base;
 
     if (method === 'post') {
       base = this.http.post(`/api/${type}`, user);
+      if(type === 'edit'){
+        base = this.http.post(`/api/${type}`, u);
+      }
     } else {
       base = this.http.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
@@ -111,6 +115,9 @@ export class AuthenticationService {
     return this.request('post', 'register', user);
   }
 
+  public edit(user: RegModel): Observable<any>{
+    return this.request('post','edit', null,user);
+  }
   public login(user: TokenPayload): Observable<any> {
     return this.request('post', 'login', user);
   }

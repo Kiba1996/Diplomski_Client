@@ -1,1 +1,60 @@
-<p>timetable works!</p>
+<div class="container" *ngIf="boolZaOtvaranje" style="text-align: center; width:70% ; align-items: center">
+
+    <br/>
+        <h2  style=" color: #d7dfde;">~ Timetable ~</h2>
+    <br/>
+    
+      <div class="btn-group btn-group-toggle" style="width: 60%" data-toggle="buttons">
+        <label for="option1" class="btn btn-primary"  (click)="setradio(1)" >
+          <input type="radio" name="options" id="option1" autocomplete="off"  > Work day
+        </label>
+        <label for="option2" class="btn btn-primary"  (click)="setradio(2)" >
+          <input type="radio" name="options" id="option2" autocomplete="off" > Saturday
+        </label>
+        <label for="option3" class="btn btn-primary"  (click)="setradio(3)" >
+          <input type="radio" name="options" id="option3" autocomplete="off" > Sunday
+        </label>
+      </div>
+    
+  
+  
+  <br/>
+  <div class=" d-flex justify-content-center " style="align-items:center; width: 100%; text-align: center" *ngIf="selectedDay">
+    <br/>
+    <br/>
+    <br/>
+  <label style="color:#d7dfde; font-size: 20px; padding-right: 5px" >Choose line: </label>
+  <select style="width: 50%" name="lineNumber"  (click)='SelectedLine($event)' class="form-control" [(ngModel)] = "SelectL">
+      <option value=0 selected>None</option>    
+      <option *ngFor="let ln of showList" value={{ln._id}}  >{{ln.lineNumber}}</option>
+    </select>
+  </div>
+  
+    
+  <div *ngIf="boolic">
+    <h3 style="color:#d7dfde;">Departures:</h3>
+    <br/>
+    <table class = "table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Time</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let st of stringovi1, let i = index">
+            <th scope = "row">{{i+1}}</th>
+            <td>{{st}}</td>
+            
+          </tr>
+         
+        </tbody>
+      </table>
+  
+  
+  
+  
+   
+  </div>
+  </div>

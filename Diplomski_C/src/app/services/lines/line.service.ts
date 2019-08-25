@@ -13,7 +13,7 @@ export class LineServiceService {
   private token: string;
   constructor( private httpClient:HttpClient) { } //private http: Http,
 
-  private request(method: 'post'|'get'|'delete', type: 'addLine'|'getAllLines'|'changeLine'|'removeLine', user?: LineModel, stId?: String): Observable<any> {
+  private request(method: 'post'|'get'|'delete', type: 'addLine'|'getAllLines'|'changeLine'|'removeLine'|'findVehicleId', user?: LineModel, stId?: any): Observable<any> {
     let base;
 
     if (method === 'post') {
@@ -23,6 +23,9 @@ export class LineServiceService {
       }
     } else if(method === 'get') {
       base = this.httpClient.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+      if(type === 'findVehicleId'){
+        base =  this.httpClient.get(`/api/${type}`, {headers: { Authorization: `Bearer ${this.getToken()}` },params: {ids:stId}});
+      }
     }
     else {
       base= this.httpClient.delete(`/api/${type}/`+ stId);
@@ -89,6 +92,6 @@ export class LineServiceService {
   //   return this.httpClient.put(this.base_url+"/api/Lines/Change?id=" + id,line);
   // }
   FindVehicleId(id): Observable<any>{
-    return this.httpClient.get(this.base_url+"/api/Lines/FindVehicle?id=" + id)
+    return this.request('get', 'findVehicleId',null ,id);
   }
 }

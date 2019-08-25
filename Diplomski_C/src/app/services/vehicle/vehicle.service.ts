@@ -33,19 +33,7 @@ export class VehicleService {
       base= this.httpClient.delete(`/api/${type}/`+ stId);
     }
 
-    // const request = base.pipe(
-    //   map((data: TokenResponse) => {
-    //     if (data.token) {
-    //       if( type === 'login')
-    //       {
-    //         this.saveToken(data.token);
-    //       }
-
-    //     }
-    //     return data;
-    //   })
-    // );
-
+   
     return base;
   }
   public getAllVehicles(): Observable<any> {
