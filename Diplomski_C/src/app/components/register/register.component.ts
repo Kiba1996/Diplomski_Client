@@ -14,7 +14,7 @@ import { AccountService } from 'src/app/services/account/account.service';
 export class RegisterComponent implements OnInit {
 
   types: any = [];
-
+  formd: FormData = new FormData();
   registerForm = this.fb.group({
    
     Password: ['',
@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
 
 
   onFileSelected(event){
-    this.selectedImage = event.target.files;
+    this.selectedImage = event.target.files[0];
      
   }
 
@@ -49,20 +49,6 @@ export class RegisterComponent implements OnInit {
   {
      return this.registerForm.controls; 
   }
-
-
-  credentials: TokenPayload = {
-    email: '',
-    name: '',
-    password: '',
-    surname: '',
-    address: '',
-    birthday: new Date(),
-    image: '',
-    activated: '',
-    role: 'AppUser',
-    passengerType: ''
-  };
 
   
   constructor(private auth: AuthenticationService, private router: Router, private fb: FormBuilder, private accountService: AccountService )
@@ -83,7 +69,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.auth.register(this.credentials).subscribe(() => {
+    this.auth.register(this.formd).subscribe(() => { //this.credentials
       this.router.navigateByUrl('/login');
     }, (err) => {
       console.error(err);
@@ -91,25 +77,30 @@ export class RegisterComponent implements OnInit {
   }
 
   Button() {
-    this.credentials.name = this.registerForm.value.Name;
-    this.credentials.surname = this.registerForm.value.Surname;
-    this.credentials.email = this.registerForm.value.Email;
-    this.credentials.password = this.registerForm.value.Password;
-    this.credentials.address = this.registerForm.value.Address;
-    this.credentials.birthday = this.registerForm.value.Birthday;
-    this.credentials.passengerType = this.registerForm.value.PassengerType;
-    this.credentials.role = "AppUser"
+   
+    this.formd.append("name",this.registerForm.value.Name);
+    this.formd.append("surname",this.registerForm.value.Surname);
+    this.formd.append("email",this.registerForm.value.Email);
+    this.formd.append("password",this.registerForm.value.Password);
+    this.formd.append("address",this.registerForm.value.Address);
+    this.formd.append("birthday",this.registerForm.value.Birthday);
+    this.formd.append("passengerType",this.registerForm.value.PassengerType);
+    this.formd.append("role","AppUser");
 
     if (this.selectedImage == undefined || this.selectedImage == null){
-      this.credentials.activated  = "NOT ACTIVATED";
-      console.log("korisnik kog saljem: ", this.credentials);
+  
+     this.formd.append("activated","NOT ACTIVATED");
+      console.log("korisnik kog saljem: ", this.formd);
      
       this.register();
    
     }
     else{
-      this.credentials.activated  = "PENDING";
-      console.log("korisnik kog saljem: ", this.credentials);
+      this.formd.append("activated","PENDING");
+     
+  
+   this.formd.append("file",this.selectedImage, this.selectedImage.name);
+      console.log("korisnik kog saljem: ", this.formd);
       this.register();
       // this.fileUploadService.uploadFile(this.selectedImage)
       //    .subscribe(data => { 

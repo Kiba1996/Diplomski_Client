@@ -85,7 +85,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
            this.birt = this.birt+ mesec.toString() + ".";
            this.birt= this.birt + d.getFullYear().toString() + "." ;
  
-          this.user.activated = "NOT_ACTIVATED"
+         // this.user.activated = "NOT_ACTIVATED"
           //  if(localStorage.getItem('role') == 'AppUser')
           //  {
              

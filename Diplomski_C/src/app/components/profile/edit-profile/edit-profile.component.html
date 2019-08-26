@@ -30,7 +30,8 @@
               <input required type="date" class="form-control" name="Birthday" placeholder="dd/mm/yyyy" [(ngModel)]="user.birthday">
             </div>
   
-            <div *ngIf="!user.Image && user.Role=='AppUser' && user.PassengerTypeId != 3">
+            <div *ngIf="!user.image && user.role=='AppUser' && pass != 3">
+                <!-- user.passengerType -->
               <div class="form-group" >
                 <input type="file" (change)="onFileSelected($event)"  style="background-color: transparent; color:#5bd6cc; border:2px solid #5bd6cc" >  
               </div>

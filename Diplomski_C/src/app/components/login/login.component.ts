@@ -11,17 +11,14 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  credentials: TokenPayload = {
-    email: '',
-    password: ''
-  };
+formd: FormData = new FormData();
   constructor(private auth: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
   }
 
   login() {
-    this.auth.login(this.credentials).subscribe(() => {
+    this.auth.login(this.formd).subscribe(() => {
       this.router.navigateByUrl('/profile');
     }, (err) => {
       console.error(err);
@@ -30,10 +27,10 @@ export class LoginComponent implements OnInit {
 
   onSignIn(loginData: RegModel, form:NgForm){
     //if(this.validations.validate(loginData)) return;
-
-    this.credentials.email = loginData.Email;
-    this.credentials.password = loginData.Password;
-    this.auth.login(this.credentials).subscribe(
+    this.formd.append("email",loginData.Email);
+    this.formd.append("password",loginData.Password);
+   
+    this.auth.login(this.formd).subscribe(
       res => {
 
         this.auth.profile().subscribe(data => {

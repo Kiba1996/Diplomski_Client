@@ -25,18 +25,6 @@ interface TokenResponse {
   token: string;
 }
 
-// export interface TokenPayload {
-//   email: string;
-//   password: string;
-//   name?: string;
-//   surname?: string;
-//   address?: string;
-//   birthday?: Date;
-//   image?: string;
-//   activated?: string;
-//   role?: string;
-  
-// }
 
 
 @Injectable({
@@ -83,14 +71,16 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post'|'get', type: 'login'|'register'|'profile'|'edit', user?: TokenPayload, u?:RegModel): Observable<any> {
+  private request(method: 'post'|'get', type: 'login'|'register'|'profile'|'edit'|'editPassword', user?: FormData, u?:RegModel): Observable<any> {
     let base;
-
     if (method === 'post') {
       base = this.http.post(`/api/${type}`, user);
       if(type === 'edit'){
-        base = this.http.post(`/api/${type}`, u);
+        base = this.http.post(`/api/${type}`, user);
       }
+      // if(type ==='register'){
+      //   base = this.http.post(`/api/${type}`, fd);
+      // }
     } else {
       base = this.http.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
@@ -111,21 +101,26 @@ export class AuthenticationService {
     return request;
   }
 
-  public register(user: TokenPayload): Observable<any> {
-    return this.request('post', 'register', user);
+  // public register(user: TokenPayload): Observable<any> {
+  //   return this.request('post', 'register', user);
+  // }
+  public register(user: FormData): Observable<any> {
+    return this.request('post', 'register',user);
   }
 
-  public edit(user: RegModel): Observable<any>{
-    return this.request('post','edit', null,user);
+  public edit(user: FormData): Observable<any>{
+    return this.request('post','edit', user);
   }
-  public login(user: TokenPayload): Observable<any> {
+  public login(user: FormData): Observable<any> {
     return this.request('post', 'login', user);
   }
 
   public profile(): Observable<any> {
     return this.request('get', 'profile');
   }
-
+public editPassword(user: FormData):Observable<any>{
+  return  this.request('post','editPassword', user);
+}
   public logout(): void {
     this.token = '';
     window.localStorage.removeItem('mean-token');

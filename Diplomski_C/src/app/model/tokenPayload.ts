@@ -9,5 +9,6 @@ export interface TokenPayload {
   activated?: string;
   role?: string;
   passengerType?: string;
+  img?: FormData;
   
 }

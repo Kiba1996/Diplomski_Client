@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./reg-admin-cont.component.css']
 })
 export class RegAdminContComponent implements OnInit {
-
+  formd: FormData = new FormData();
   serverErrors: string[];
   registerForm = this.fb.group({
    
@@ -44,19 +44,7 @@ export class RegAdminContComponent implements OnInit {
 
 
   
-  credentials: TokenPayload = {
-    email: '',
-    name: '',
-    password: '',
-    surname: '',
-    address: '',
-    birthday: new Date(),
-    image: '',
-    activated: '',
-    role: '',
-    passengerType: ''
-  };
-
+ 
 //private notificationServ: NotificationService,
 
   constructor(private fb: FormBuilder, private accountService: AuthenticationService, private router: Router) { 
@@ -70,7 +58,7 @@ export class RegAdminContComponent implements OnInit {
 
 
   register() {
-    this.accountService.register(this.credentials).subscribe(() => {
+    this.accountService.register(this.formd).subscribe(() => {
       this.router.navigateByUrl('/login');
     }, (err) => {
       console.error(err);
@@ -82,16 +70,16 @@ export class RegAdminContComponent implements OnInit {
     let formData: FormData = new FormData();
 
 
-    this.credentials.name = this.registerForm.value.Name;
-    this.credentials.surname = this.registerForm.value.Surname;
-    this.credentials.email = this.registerForm.value.Email;
-    this.credentials.password = this.registerForm.value.Password;
-    this.credentials.address = this.registerForm.value.Address;
-    this.credentials.birthday = this.registerForm.value.Birthday;
-    this.credentials.role = this.registerForm.value.Role;
+    this.formd.append("name",this.registerForm.value.Name);
+    this.formd.append("surname",this.registerForm.value.Surname);
+    this.formd.append("email",this.registerForm.value.Email);
+    this.formd.append("password",this.registerForm.value.Password);
+    this.formd.append("address",this.registerForm.value.Address);
+    this.formd.append("birthday",this.registerForm.value.Birthday);
+    this.formd.append("role", this.registerForm.value.Role);
+    this.formd.append("activated","PENDING");
 
-
-    regModel.Activated  = "PENDING";
+   
    
     this.register();
 
