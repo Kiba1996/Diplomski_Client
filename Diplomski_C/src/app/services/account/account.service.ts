@@ -34,11 +34,15 @@ export class AccountService {
     return this.token;
   }
 
-  private request(method: 'get', type: 'getPassengerTypes'): Observable<any> {
+  private request(method: 'get'| 'post', type: 'getPassengerTypes' | 'resendReqest', u?:FormData): Observable<any> {
     let base;
-
-    
-     return base = this.http.get(`/api/${type}`).pipe();
+    if(method==='post'){
+     return base = this.http.post(`/api/${type}`,u);
+    }
+    else{
+      return base = this.http.get(`/api/${type}`).pipe();
+    }
+     
     
 
     // const request = base.pipe(
@@ -56,4 +60,8 @@ export class AccountService {
   public getPassengerTypes(): Observable<any> {
     return this.request('get', 'getPassengerTypes');
   }
+  public resendReqest(u: FormData): Observable<any> {
+    return this.request('post', 'resendReqest',u);
+  }
+
 }

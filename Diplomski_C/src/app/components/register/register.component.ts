@@ -88,8 +88,13 @@ export class RegisterComponent implements OnInit {
     this.formd.append("role","AppUser");
 
     if (this.selectedImage == undefined || this.selectedImage == null){
-  
-     this.formd.append("activated","NOT ACTIVATED");
+      if(this.registerForm.value.PassengerType == "Regular"){
+        this.formd.append("activated","ACTIVATED");
+      }
+      else{
+        this.formd.append("activated","NOT ACTIVATED");
+      }
+     
       console.log("korisnik kog saljem: ", this.formd);
      
       this.register();

@@ -42,7 +42,7 @@ import {
 } from 'ngx-toastr';
 import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
-
+import { NgxPayPalModule } from 'ngx-paypal';
 
 //gard
 
@@ -185,7 +185,8 @@ const routes: Routes = [
     ToastNoAnimationModule,
     ToastrModule.forRoot({
       toastComponent: ToastNoAnimation,
-    })
+    }),
+    NgxPayPalModule,
   ],
   providers: [ CanActivateViaAuthGuard,
     CanActivateUser,
