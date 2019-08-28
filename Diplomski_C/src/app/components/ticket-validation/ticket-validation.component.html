@@ -1,1 +1,34 @@
-<p>ticket-validation works!</p>
+<div style="align-items: center; ">
+    <div class="container" style="text-align: center; width:70% ;">
+      <br/>
+      <h2  style=" color: #d7dfde;">~ Ticket validation ~</h2>
+      <br/>
+      <label style="font-size: 22px; color:#5bd6cc;">Ticket ID:</label><br/>
+      <input type="text" name="ticketId" [(ngModel)]="myInput" placeholder="Ticket ID" style="width: 50%">
+      <br/>
+      <br/>
+      <button name="butoon1" class="btn btn-primary btn-lg" (click)="FindTicket(myInput)">Find ticket</button>
+      <br/>
+      <br/>
+  
+      <span class="badge badge-danger" style="font-size: 22px; font-family: 'Gill Sans'" >{{ticketExists}}</span>
+      <!-- <label>{{ticketExists}}</label><br/> -->
+  
+      <div *ngIf="ticketForV">
+        <div *ngIf="ticketForV.user && ticketForV.user != ''">
+          <label style="font-size: 22px; color:#5bd6cc;">User email:</label><br/>
+          <input type="text" name="userEmail" [(ngModel)] = "myInput1" placeholder="User email" style="width: 50%" >
+          <br/>
+          <br/>
+          <button name="butoon2" (click)="ValidateTicket(myInput1)" class="btn btn-primary btn-lg">Validate</button>
+          <br/>
+          <br/>
+        </div>
+      </div>
+  <br/>
+      <span class="badge badge-success" style="font-size: 22px; font-family: 'Gill Sans'" >{{ticketMessage}}</span>
+      <span class="badge badge-danger" style="font-size: 22px; font-family: 'Gill Sans'" >{{ticketMessageError}}</span>
+  
+      <!-- <label>{{ticketMessage}}</label> -->
+    </div>
+  </div>

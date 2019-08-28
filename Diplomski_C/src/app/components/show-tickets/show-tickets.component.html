@@ -1,1 +1,23 @@
-<p>show-tickets works!</p>
+<div *ngIf="prikazKarata && allTickets.length>0" style="width:700px; align-items: center" class="container">
+    <div>
+      <br/>
+      <h2  style="text-align: center; color: #d7dfde;">~ Your tickets ~</h2>
+    </div>
+    <br/>
+   
+    <ul class="list-group" *ngFor="let t of allTickets, let i = index">
+        <button class="list-group-item-action button2" style="margin: 0 0 7px 0; border:2px solid #5bd6cc; background-color: transparent;
+        font-family: 'Gill Sans'; border-radius: 20px; 
+        font-size: 20px;
+        color: #d6e4e3;"><span class="pull-center " style="float:center; ">
+      <label style="padding-left: 10px" > <b>Ticket ID: </b> {{t._id}}</label> <br/> 
+      <label style="padding-left: 10px" >   <b>Time of purchase: </b> {{blaa[i]}}</label><br/>
+      <label style="padding-left: 10px" >  <b> {{blaa1[i]}}</b></label><br/>
+      <label style="padding-left: 10px" >  <b> Type: </b> {{blaa2[i]}}</label><br/>
+      <label style="padding-left: 10px">   <b>Price: </b> {{blaa3[i]}} RSD</label><br/>
+    </span>
+  </button>
+    </ul>
+    <!-- {{t.PurchaseTime}} -->
+  </div>
+  

@@ -18,15 +18,24 @@ export class TicketService {
     return this.token;
   }
  
-  private request(method: 'post'|'get', type: 'getAllTicketTypes' | 'addTickets' |'addPayPal' | 'getTypeUser'|'checkValidity' | 'validateTicketNoUser' |'validateTicket'|'getTicketsForOneUser' | 'addPayPal', t?: FormData, e?:any): Observable<any> {
+  private request(method: 'post'|'get', type: 'getAllTicketTypes' | 'addTickets' |'addPayPal' | 'getTicket'|'getTypeUser'|'checkValidity' | 'validateTicketNoUser' |'validateTicket'|'getTicketsForOneUser' | 'addPayPal'|'getTicketPrice' | 'sendMail', t?: FormData, e?:any): Observable<any> {
     let base;
 
     if (method === 'post') {
       base = this.httpClient.post(`/api/${type}`, t);
+      if(type==='validateTicketNoUser'){
+        base = this.httpClient.post(`/api/${type}`, e);
+      }
+      if(type === 'validateTicket'){
+        base=this.httpClient.post(`/api/${type}/`+e.em, e.ti);
+      }
     } else if(method === 'get') {
       base = this.httpClient.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }} );
-      if(type === 'getTypeUser'){
+      if(type === 'getTypeUser' || type==='getTicketsForOneUser' || type==='getTicket'){
         base =  this.httpClient.get(`/api/${type}/`+e);
+      }
+      if(type === 'getTicketPrice'){
+        base = this.httpClient.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }, params:{user: e.user, ticketPrice: e.ticketPrice}} );
       }
     }
 
@@ -36,9 +45,12 @@ export class TicketService {
   public getAllTicketTypes(): Observable<any> {
     return this.request('get', 'getAllTicketTypes');
   }
+public getTicketPrice(fd: any): Observable<any>{
+  return this.request('get', 'getTicketPrice', null,fd);
+}
 
   
-  public getTypeUser(email : any) {
+  public getTypeUser(email : any): Observable<any> {
     return this.request('get','getTypeUser',null,email);
   }
   public addTicket(ticket): Observable<any>{
@@ -50,25 +62,25 @@ export class TicketService {
     return this.request('post','addPayPal',payPal);
   }
 
-  SendMail(ticket): Observable<any>{
+  public SendMail(ticket): Observable<any>{
     
-    return this.httpClient.post(this.base_url+"/api/Tickets/SendMail",ticket);
+    return this.request('post','sendMail',ticket);
   }
 
-  getTicket(id) {
-    return this.httpClient.get(this.base_url+"/api/Tickets/GetTicket?id="+id);
+  public getTicket(id) : Observable<any>{
+    return this.request('get','getTicket',null,id);
   }
-  public getAllTicketsForOneUser(id){
-    return this.request('get','getTicketsForOneUser',id);
+  public getAllTicketsForOneUser(id): Observable<any>{
+    return this.request('get','getTicketsForOneUser',null,id);
   }
  public  checkValidity(bla) : Observable<any> {
     return this.request('post','checkValidity', bla);
   }
 
- public validateTicketNoUser(ticket) : Observable<any> {
-    return this.request('post','validateTicketNoUser', ticket);
+ public validateTicketNoUser(ticket:any) : Observable<any> {
+    return this.request('post','validateTicketNoUser', null,ticket);
   }
-  public validateTicket(ticket) : Observable<any> {
-    return this.request('post','validateTicket', ticket);
+  public validateTicket(email: any,ticket:any) : Observable<any> {
+    return this.request('post','validateTicket', null,{em:email,ti:ticket});
   }
 }

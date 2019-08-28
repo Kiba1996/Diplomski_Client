@@ -53,12 +53,14 @@ export class BuyATicketComponent implements OnInit {
       this.pricelistServ.getPricelist().subscribe(data => {
         this.priceList = data; 
         this.priceList.TicketPricess = [];
-        this.pricelistServ.getTicketPrices(this.priceList._id).subscribe(data=>{
-          data.forEach(element => {
-            this.priceList.TicketPricess.push(element);
-          });
-        })
-         console.log(data);
+        if(this.priceList){
+          this.pricelistServ.getTicketPrices(this.priceList._id).subscribe(data=>{
+            data.forEach(element => {
+              this.priceList.TicketPricess.push(element);
+            });
+          })
+           console.log(data);
+        }
 
          let ro = localStorage.getItem('role');
          if(ro)
@@ -73,6 +75,9 @@ export class BuyATicketComponent implements OnInit {
          }
 
 
+      },err =>{
+        window.alert(err.error.message)
+        console.log(err);
       });
     });
     
@@ -153,12 +158,12 @@ setradio(sel)
     });
   }
 
-  UpisiKartu() {
+  UpisiKartu(neregistrovani: boolean) {
 
     let payPalMod = new FormData();// = new PayPalModel(0);
     payPalMod.append("payementId", this.dobavljanjePayPal.id);
     let pom = new Date(this.dobavljanjePayPal.create_time);
-    //pom.setHours(pom.getHours() + 2);
+    pom.setHours(pom.getHours() + 2);
     payPalMod.append("createTime", pom.toString());
     payPalMod.append("payerEmail", this.dobavljanjePayPal.payer.email_address);
     payPalMod.append("payerName", this.dobavljanjePayPal.payer.name.given_name);
@@ -194,7 +199,21 @@ setradio(sel)
         payPalMod.append("ticketPrices", element._id);
       }
     });
-    payPalMod.append('user', this.user._id);
+    
+    if(neregistrovani){
+      if(this.mailZaSlanje != "" && this.mailZaSlanje != undefined && this.mailZaSlanje != null)
+      {
+        payPalMod.append("name", this.mailZaSlanje);
+      }else
+      {
+          payPalMod.append("name", this.korisceniEmail);
+      }
+    }
+    else{
+      payPalMod.append('user', this.user._id);
+    }
+    
+   
 
     let tpom// = new TicketPomModel(ticketMod, payPalMod.PayementId);
     this.ticketServ.addPayPal(payPalMod).subscribe(data => {
@@ -225,85 +244,85 @@ setradio(sel)
     form.reset();
   }
 
-  upisiKartuNew()
-  {
+  // upisiKartuNew()
+  // {
 
-    let payPalMod = new FormData();// = new PayPalModel(0);
-    payPalMod.append("payementId", this.dobavljanjePayPal.id);
-    let pom = new Date(this.dobavljanjePayPal.create_time);
-    //pom.setHours(pom.getHours() + 2);
-    payPalMod.append("createTime", pom.toString());
-    payPalMod.append("payerEmail", this.dobavljanjePayPal.payer.email_address);
-    payPalMod.append("payerName", this.dobavljanjePayPal.payer.name.given_name);
-    payPalMod.append("payerSurname", this.dobavljanjePayPal.payer.name.surname);
-    payPalMod.append("currencyCode", this.dobavljanjePayPal.purchase_units[0].amount.currency_code);
-    payPalMod.append("value",  this.dobavljanjePayPal.purchase_units[0].amount.value);
+  //   let payPalMod = new FormData();// = new PayPalModel(0);
+  //   payPalMod.append("payementId", this.dobavljanjePayPal.id);
+  //   let pom = new Date(this.dobavljanjePayPal.create_time);
+  //   //pom.setHours(pom.getHours() + 2);
+  //   payPalMod.append("createTime", pom.toString());
+  //   payPalMod.append("payerEmail", this.dobavljanjePayPal.payer.email_address);
+  //   payPalMod.append("payerName", this.dobavljanjePayPal.payer.name.given_name);
+  //   payPalMod.append("payerSurname", this.dobavljanjePayPal.payer.name.surname);
+  //   payPalMod.append("currencyCode", this.dobavljanjePayPal.purchase_units[0].amount.currency_code);
+  //   payPalMod.append("value",  this.dobavljanjePayPal.purchase_units[0].amount.value);
 
-    console.log("PayPal model: ", payPalMod);
+  //   console.log("PayPal model: ", payPalMod);
 
-  //  let ticketMod// = new TicketModel("",new Date(),0,"",0,0);
-    let b = new Date();
-    b.setHours(b.getHours()+ 2);
-    payPalMod.append("purchaseTime", new Date(b).toString());
+  // //  let ticketMod// = new TicketModel("",new Date(),0,"",0,0);
+  //   let b = new Date();
+  //   b.setHours(b.getHours()+ 2);
+  //   payPalMod.append("purchaseTime", new Date(b).toString());
     
-    let ticketType;
-    this.allTicketTypes.forEach(element => {
-      if(element.name == "Hourly" && this.selecetTT == 1){
-        ticketType = element._id;
-      }
-      if(element.name == "Daily" && this.selecetTT == 2){
-        ticketType = element._id;
-      }
-      if(element.name == "Monthly" && this.selecetTT == 3){
-        ticketType = element._id;
-      }
-      if(element.name == "Yearly" && this.selecetTT == 4){
-        ticketType = element._id;
-      }
-    });
-    payPalMod.append("ticketType", ticketType);
-    this.priceList.TicketPricess.forEach(element => {
-      if(element.TicketTypeId == this.selecetTT)
-      {
-        payPalMod.append("ticketPrices", element._id);
-      }
-    });
-    payPalMod.append('user', this.user._id);
+  //   let ticketType;
+  //   this.allTicketTypes.forEach(element => {
+  //     if(element.name == "Hourly" && this.selecetTT == 1){
+  //       ticketType = element._id;
+  //     }
+  //     if(element.name == "Daily" && this.selecetTT == 2){
+  //       ticketType = element._id;
+  //     }
+  //     if(element.name == "Monthly" && this.selecetTT == 3){
+  //       ticketType = element._id;
+  //     }
+  //     if(element.name == "Yearly" && this.selecetTT == 4){
+  //       ticketType = element._id;
+  //     }
+  //   });
+  //   payPalMod.append("ticketType", ticketType);
+  //   this.priceList.TicketPricess.forEach(element => {
+  //     if(element.TicketTypeId == this.selecetTT)
+  //     {
+  //       payPalMod.append("ticketPrices", element._id);
+  //     }
+  //   });
+  //   payPalMod.append('user', this.user._id);
 
-    // if(this.mailZaSlanje != "" && this.mailZaSlanje != undefined && this.mailZaSlanje != null){
-    //   payPalMod.append("name", this.mailZaSlanje);
+  //   // if(this.mailZaSlanje != "" && this.mailZaSlanje != undefined && this.mailZaSlanje != null){
+  //   //   payPalMod.append("name", this.mailZaSlanje);
      
-    // }else{
-    //   payPalMod.append("name", this.korisceniEmail);
-    // }
-    let tpom// = new TicketPomModel(ticketMod, payPalMod.PayementId);
-    this.ticketServ.addPayPal(payPalMod).subscribe(data => {
-     // this.ticketServ.addTicket(tpom).subscribe(data => {
+  //   // }else{
+  //   //   payPalMod.append("name", this.korisceniEmail);
+  //   // }
+  //   let tpom// = new TicketPomModel(ticketMod, payPalMod.PayementId);
+  //   this.ticketServ.addPayPal(payPalMod).subscribe(data => {
+  //    // this.ticketServ.addTicket(tpom).subscribe(data => {
         
-        window.alert("Ticket successfully bought!");
+  //       window.alert("Ticket successfully bought!");
 
-          // this.ticketServ.SendMail(ticketMod).subscribe(resp =>{
-          //   if(resp == 'Ok'){
-          //    window.alert("Ticket successfully bought!")
-          //     this.router.navigateByUrl('/home');
-          //   }
-          //   else{
-          //     alert("Something went wrong");
-          //     this.router.navigateByUrl('/home');
-          //   }
-          // });
+  //         // this.ticketServ.SendMail(ticketMod).subscribe(resp =>{
+  //         //   if(resp == 'Ok'){
+  //         //    window.alert("Ticket successfully bought!")
+  //         //     this.router.navigateByUrl('/home');
+  //         //   }
+  //         //   else{
+  //         //     alert("Something went wrong");
+  //         //     this.router.navigateByUrl('/home');
+  //         //   }
+  //         // });
        
 
-        // window.alert("Ticket successfully bought!")
-        // this.router.navigate(['home']);
-      },
-      err =>{
-        window.alert(err.error)
-        console.log(err);
-      });
+  //       // window.alert("Ticket successfully bought!")
+  //       // this.router.navigate(['home']);
+  //     },
+  //     err =>{
+  //       window.alert(err.error)
+  //       console.log(err);
+  //     });
       
       
-  }
+  // }
 
 
   
@@ -366,10 +385,10 @@ setradio(sel)
           if(this.neregKupVremKartu)
           {
             this.korisceniEmail  = data.payer.email_address;
-            this.upisiKartuNew();
+            this.UpisiKartu(true);
           }
           else{
-            this.UpisiKartu();
+            this.UpisiKartu(false);
           }
       },
       onCancel: (data, actions) => {
