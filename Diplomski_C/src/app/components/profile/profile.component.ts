@@ -25,7 +25,6 @@ export class ProfileComponent implements OnInit,OnDestroy {
       this.accBool = false;
       this.nijeUser = false;
       this.provera();
-     // this.requestUserInfo(); // this populates an array
       
    });
 
@@ -61,21 +60,10 @@ export class ProfileComponent implements OnInit,OnDestroy {
 
     this.provera();
 
-    // this.auth.profile().subscribe(user => {
-    //   this.details = user;
-    // }, (err) => {
-    //   console.error(err);
-    // });
   }
 
   requestUserInfo(){
-    // this.usersService.getUserClaims().subscribe(claims => {
-
-      // this.auth.profile().subscribe(user => {
-      //   this.details = user;
-      // }, (err) => {
-      //   console.error(err);
-      // });
+ 
       this.auth.profile().subscribe(data => {
          
            this.user = data;
@@ -121,7 +109,6 @@ export class ProfileComponent implements OnInit,OnDestroy {
   Resend(){
     let kor = localStorage.getItem('name');
    let fd : FormData = new FormData();
-   //m.Id = kor;
    fd.append("email", kor);
     this.AccountServ.resendReqest(fd).subscribe(data =>
       {

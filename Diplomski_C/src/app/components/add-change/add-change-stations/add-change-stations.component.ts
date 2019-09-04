@@ -6,7 +6,6 @@ import { GeoLocation } from 'src/app/model/map/geolocation';
 import { MarkerInfo } from 'src/app/model/map/marker-info.model';
 import { StationModel } from 'src/app/model/stationModel';
 import { StationService } from 'src/app/services/stations/station.service';
-//import { AddStationValidation } from 'src/app/models/Validation/validationModels';
 
 @Component({
   selector: 'app-add-change-stations',
@@ -23,10 +22,9 @@ export class AddChangeStationsComponent implements OnInit {
   address: string;
   stati: any = [];
   id: number;
- // version: number;
+  version: number;
   public allStations: any = [];
   iconPath : any = { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}}
- // validations : AddStationValidation = new AddStationValidation();
 
   constructor(private ngZone: NgZone, private mapsApiLoader : MapsAPILoader, private statServ: StationService) { 
     this.statServ.getAllStations().subscribe(data => {
@@ -63,7 +61,7 @@ export class AddChangeStationsComponent implements OnInit {
           this.refresh();
         },
         err => {
-          window.alert(err.error);
+          window.alert(err.error.message);
           this.refresh();
         });
      
@@ -78,7 +76,7 @@ export class AddChangeStationsComponent implements OnInit {
         stationData.Name = this.name;
       }
       stationData.Id = this.id;
-      ///stationData.Version = this.version;
+      stationData.Version = this.version;
      
       console.log("stationData")
       console.log(stationData)
@@ -89,7 +87,7 @@ export class AddChangeStationsComponent implements OnInit {
           this.refresh();
         },
         err => {
-          window.alert(err.error);
+          window.alert(err.error.message);
           this.refresh();
         });
     }
@@ -109,7 +107,7 @@ export class AddChangeStationsComponent implements OnInit {
         this.refresh();
       },
       err => {
-        window.alert(err.error);
+        window.alert(err.error.message);
         this.refresh();
       });
     
@@ -128,10 +126,10 @@ export class AddChangeStationsComponent implements OnInit {
 
   isSelected(name: string): boolean   
   { 
-    if (!this.selected) { // if no radio button is selected, always return false so every nothing is shown  
+    if (!this.selected) { 
       return false;  
     }  
-    return (this.selected === name); // if current radio button is selected, return true, else return false  
+    return (this.selected === name); 
   } 
 
   placeMarker1($event){
@@ -154,13 +152,13 @@ export class AddChangeStationsComponent implements OnInit {
     
   }
 
-  markerDragEnd($event: MouseEvent, name:string, id: number) {
+  markerDragEnd($event: MouseEvent, name:string, id: number, version: number) {
     this.coordinates.latitude = $event.coords.lat;
     this.coordinates.longitude = $event.coords.lng;
     this.getAddress(this.coordinates.latitude, this.coordinates.longitude);
     this.name = name;
     this.id = id;
-    //this.version = version;
+    this.version = version;
     console.log(id);
   }
 

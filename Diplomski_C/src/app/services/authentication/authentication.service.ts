@@ -25,8 +25,6 @@ interface TokenResponse {
   token: string;
 }
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -78,10 +76,8 @@ export class AuthenticationService {
       if(type === 'edit'){
         base = this.http.post(`/api/${type}`, user);
       }
-      // if(type ==='register'){
-      //   base = this.http.post(`/api/${type}`, fd);
-      // }
-    } else {
+    } 
+    else {
       base = this.http.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
 
@@ -101,9 +97,6 @@ export class AuthenticationService {
     return request;
   }
 
-  // public register(user: TokenPayload): Observable<any> {
-  //   return this.request('post', 'register', user);
-  // }
   public register(user: FormData): Observable<any> {
     return this.request('post', 'register',user);
   }
@@ -124,7 +117,6 @@ public editPassword(user: FormData):Observable<any>{
   public logout(): void {
     this.token = '';
     window.localStorage.removeItem('mean-token');
-    // localStorage.removeItem('jwt');
     localStorage.removeItem('role');
     localStorage.removeItem('name');
     this.router.navigateByUrl('/');

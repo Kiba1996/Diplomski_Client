@@ -28,12 +28,8 @@ export class VerificationService {
       base= this.httpClient.delete(`/api/${type}/`+ stId);
     }
 
-
-
     return base;
   }
-
-
 
   public getAwaitingAdmins() : Observable<any>
   {

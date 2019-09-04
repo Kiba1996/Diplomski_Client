@@ -1,11 +1,13 @@
-<div *ngIf="user" class="container" style="width:700px; align-items: center">
-    <div *ngIf="user.activated== 'ACTIVATED' && user.role=='Admin'">
-      <div *ngIf="awaitingAdmins.length > 0" class="col-md-12" >
+<div *ngIf="user" class="container" style=" align-items: center">
+  <div class="row">
+
+  <div class="col" *ngIf="user.activated== 'ACTIVATED' && user.role=='Admin'">
+      <div *ngIf="awaitingAdmins.length > 0" >
         <br/>
-        <h3 style="text-align: center; color: white">Authorize awaiting admins:</h3>
+        <h3 style="text-align: center; color: #ff9955">Authorize awaiting admins:</h3>
         <br/>
         <ul class="list-group" *ngFor="let awaitingAdmin of awaitingAdmins; let i = index">
-          <li class="list-group-item" style="background-color: rgb(194, 247, 239) ; margin: 0 0 7px 0;"><b>{{awaitingAdmin.name}} {{awaitingAdmin.surname}} </b>
+          <li class="list-group-item" style="background-color: #f8c4a1 ; margin: 0 0 7px 0;"><b>{{awaitingAdmin.name}} {{awaitingAdmin.surname}} </b>
             <span class="pull-right" style="float:right">
               <button class="btn btn-success btn-small" (click)="AuthorizeAdmins(awaitingAdmin._id,i)">Authorize Admin</button>
               <button class="btn btn-danger btn-small" style="margin-left: 3px" (click)="DeclineAdmins(awaitingAdmin._id,i)">Decline Admin</button>
@@ -17,13 +19,13 @@
           </li>
         </ul>
       </div>
-
-      <div *ngIf="awaitingControllers.length > 0" class="col-md-12" >
+    </div>
+      <div *ngIf="awaitingControllers.length > 0" class="col" >
         <br/>
-        <h3 style="text-align: center; color: white">Authorize awaiting controllers: </h3>
+        <h3 style="text-align: center; color: #ff9955">Authorize awaiting controllers: </h3>
         <br/>
         <ul class="list-group" *ngFor="let awaitingController of awaitingControllers; let i = index">
-          <li class="list-group-item" style="background-color: rgb(194, 247, 239); margin: 0 0 7px 0;"><b>{{awaitingController.name}} {{awaitingController.surname}} </b>
+          <li class="list-group-item" style="background-color:#f8c4a1; margin: 0 0 7px 0;"><b>{{awaitingController.name}} {{awaitingController.surname}} </b>
             <span class="pull-right" style="float:right">
               <button class="btn btn-success btn-small" (click)="AuthorizeControllers(awaitingController._id,i)">Authorize Controller</button>
               <button class="btn btn-danger btn-small" style="margin-left: 3px" (click)="DeclineControllers(awaitingController._id,i)">Decline Controller</button>
@@ -36,15 +38,15 @@
         </ul>
         <br/>
       </div>
-    </div>
+    
 
-    <div *ngIf="user.activated== 'ACTIVATED' && user.role=='Controller'">
-      <div *ngIf="awaitingClients.length > 0" class="col-md-12" >
+    <div class="col" *ngIf="user.activated== 'ACTIVATED' && user.role=='Controller'">
+      <div *ngIf="awaitingClients.length > 0"  >
       <br/>
-      <h3 style="text-align: center; color: white">Authorize awaiting users:</h3> 
+      <h3 style="text-align: center; color: #ff9955">Authorize awaiting users:</h3> 
       <br/>
       <ul class="list-group" *ngFor="let awaitingClient of awaitingClients; let i = index">
-        <li class="list-group-item"  style="background-color: rgb(194, 247, 239); margin: 0 0 7px 0;"><b>{{awaitingClient.name}}  {{awaitingClient.surname}}</b><br>
+        <li class="list-group-item"  style="background-color: #f8c4a1; margin: 0 0 7px 0;"><b>{{awaitingClient.name}}  {{awaitingClient.surname}}</b><br>
           <label><i>{{awaitingClient.email}}</i></label><br/>
           <img *ngIf="imagesLoaded" src="{{wtfList[i]}}" width="200" height="100" alt="">
           <span class="pull-right" style="float:right">
@@ -56,3 +58,4 @@
       </div>
     </div>
   </div>
+</div> 

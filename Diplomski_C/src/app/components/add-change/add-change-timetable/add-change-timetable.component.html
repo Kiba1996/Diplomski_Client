@@ -1,6 +1,6 @@
 <div class="container"  style="text-align: center; width:100% ; align-items: center">
     <br/>
-    <h2  style=" color: #d7dfde;">~ Add/Change timetable ~</h2>
+    <h2  style=" color: #ff9955;"> Add/Change timetable </h2>
     <br/>
     <div class="btn-group btn-group-toggle" style="width: 80%" data-toggle="buttons">
       <label for="option1" class="btn btn-primary active"  (click)="setradio('Add')" >
@@ -14,73 +14,70 @@
     </div>  
   
   <div class = "row" style= "width: 100%;  text-align: center">
-      <div class="col-xs-6 " style="width:50%">
-  <div  *ngIf="isSelected('Add') || isSelected('Change')" style="width:70%" >
-    <br/>
-    <label style="color:#d7dfde; font-size: 20px; padding-right: 8px; " >Select daytpe:</label>
-    <select  class="form-control" name="dayTipe" (click)='SelectedDaytype($event)' [(ngModel)] = 'daySelected'> 
-        <option value="0">None</option>
-        <option *ngFor="let ln of allDayTypes" value={{ln._id}} >{{ln.name}}</option>
-    </select>
-  </div>
-  <br/>
-    <div  *ngIf="selectedDay" style="width:70%">
-        <label style="color:#d7dfde; font-size: 20px; padding-right: 8px; " >Select line:</label>
-          <select name="lineNumbers" class="form-control" (click)='SelectedLine($event)' [(ngModel)] = 'lineSelected'>
-              <option value=0>None</option>
-              <option *ngFor="let ln of showList" value={{ln._id}}  >{{ln.lineNumber}}</option>
-          </select>
-    </div>
-  <br/>
-    <div  *ngIf="chooseVehicle && isSelected('Add') && boolic " style="width:70%">
-        <label style="color:#d7dfde; font-size: 20px; padding-right: 8px; " >Select vehicle:</label>
+   <div class="col " style="width:40% ">
+      <div  *ngIf="isSelected('Add') || isSelected('Change')" style="width:300px" > 
+        <br/>
+        <label style="color:#ff9955; font-size: 20px; padding-right: 8px; " >Select daytpe:</label>
+        <select  class="form-control" name="dayTipe" (click)='SelectedDaytype($event)' [(ngModel)] = 'daySelected'> 
+            <option value="0">None</option>
+            <option *ngFor="let ln of allDayTypes" value={{ln._id}} >{{ln.name}}</option>
+        </select>
+      </div>
+      <br/>
+      <div  *ngIf="selectedDay" style="width:300px"> 
+          <label style="color:#ff9955; font-size: 20px; padding-right: 8px; " >Select line:</label>
+            <select name="lineNumbers" class="form-control" (click)='SelectedLine($event)' [(ngModel)] = 'lineSelected'>
+                <option value=0>None</option>
+                <option *ngFor="let ln of showList" value={{ln._id}}  >{{ln.lineNumber}}</option>
+            </select>
+      </div>
+      <br/>
+      <div  *ngIf="chooseVehicle && isSelected('Add') && boolic" style="width:300px"> 
+        <label style="color:#ff9955; font-size: 20px; padding-right: 8px; " >Select vehicle:</label>
         <select class="form-control" name="vehicleChoice"  (click)='SelectedVehicle($event)' ngModel>
             <option *ngFor="let ln of availableVehicles" value={{ln._id}}  >{{ln._id}} - {{ln.vehicleType}}</option>
         </select>
    
-  </div>
-  </div>
-  <br/>
-  <div class="col-xs-6 " >
-        <br/>
-    <div *ngIf="boolic">
-      <div *ngIf="isSelected('Change')">
-         
-          <button  class="btn btn-primary btn-lg " style="float:left" name="butoon3" (click)="ChangeTimetable()"  >Change timetable</button>
-        
-        <button class="btn btn-danger btn-lg" style="float: right" name="butoon4" (click)="DeleteTimetable()" >Remove timetable</button>
-       
-        <br/>
       </div>
-  
-      <button  class="btn btn-primary btn-lg" name="butoon2" (click)="AddTimetable()" *ngIf="isSelected('Add')">Add timetable</button>
-      <br/>
-      <label style="color:#d7dfde;">_____________________________________________________________________</label>
-      <br/>
-  <br/>
-     
-        <div  class="d-flex"  >
-          <label style="color:#d7dfde; font-size: 18px; padding-right: 8px">Add time: </label>
+    </div>
+    <br/>
+  <div class="col" style="width:40%" >
+    <br/>
+    <div *ngIf="boolic">
+    <br/>
+      <div class="d-flex"  >
+          <label style="color:#ff9955; font-size: 18px; padding-right: 8px">Add time: </label>
           <input  class="form-control" type="time" name="vreme" [(ngModel)]="myInput" >
-          
-        </div>
-        
-        <button  class="btn btn-primary"  name="butoon1" (click)="addTime(myInput)">AddTime</button> <br/>
+      </div>
+      <button  class="btn"  name="butoon1" (click)="addTime(myInput)">AddTime</button> <br/>
   
      <br/>
      <br/>
-      
-        <div *ngFor="let st of stringovi1, let i = index" style="border:2px #5bd6cc solid">
-          <br/>
-            <label  style="color:#d7dfde; font-size: 18px; padding-right: 8px"><b>{{i + 1}}. {{st}}</b></label>
-            <button class="btn btn-danger btn-sm"  (click)="removeFromTimes(st,i)">X</button> <br/>
-            
-          
+     <div class="row" *ngFor="let st of stringovi1, let i = index" style=" align-content: center">
+       <div class="col">
+       <br/>
+        <label  style="color:#ff9955; font-size: 18px; padding-right: 8px"><b>{{i + 1}}. {{st}}</b></label>
+        <button class="btn btn-danger btn-sm"  (click)="removeFromTimes(st,i)">X</button> <br/>
         </div>
-      
-    </div>
-   
+      </div>
     </div>
   </div>
+  <div class="col" *ngIf="boolic" style="align-content: center; text-align: center" style="width: 20%">
+    <br/><br/>
+    <div class="row" *ngIf="isSelected('Change')">
+       <div class="col">
+          <button  class="btn" style="float:left" name="butoon3" (click)="ChangeTimetable()"  >Change timetable</button>
+       </div>
+       <div class="col">
+          <button class="btn" style="float: right" name="butoon4" (click)="DeleteTimetable()" >Remove timetable</button>
+       </div>
+       <br/>
+      </div>
+     <button  class="btn" name="butoon2" (click)="AddTimetable()" *ngIf="isSelected('Add')">Add timetable</button>
+     <br/>
+     <br/>
+    </div>
   </div>
+ 
+</div>
   

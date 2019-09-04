@@ -35,10 +35,7 @@ export class AddChangeVehicleComponent implements OnInit {
 
     if(this.selected == "Add")
     {
-      // if(vehicleData.Type == "" || vehicleData.Type == null){
-      //   window.alert("You have to select type!");
-      // }else
-      // {
+     
       console.log(vehicleData)
       this.vehicleServ.addVehicle(vehicleData).subscribe(data=>{
         window.alert("Vehicle successfully added!");
@@ -49,7 +46,6 @@ export class AddChangeVehicleComponent implements OnInit {
         window.alert(err.error);
         this.refresh();
       });
-    //}
     }
     else if(this.selected == "Remove"){
 
@@ -67,9 +63,6 @@ export class AddChangeVehicleComponent implements OnInit {
           window.alert(err.error);
           this.refresh();
         });
-      //}
-
-
     }
 
   }

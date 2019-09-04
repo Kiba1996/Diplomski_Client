@@ -12,7 +12,6 @@ export class NotificationsComponent implements OnInit {
   user: any;
   awaitingAdmins:any = [];
   awaitingControllers:any = [];
-  //modelHelp: ModelHelperAuthorization = new ModelHelperAuthorization("");
   awaitingClients:any = [];
   awaitingRegularClients: any = [];
 
@@ -20,7 +19,6 @@ export class NotificationsComponent implements OnInit {
   imagesLoaded:boolean = false
   wtfList:any = []
 
-  //, private notificationServ: NotificationService
   constructor(private verifyService: VerificationService,private auth: AuthenticationService) { 
     this.auth.profile().subscribe(data => {
 
@@ -53,8 +51,6 @@ export class NotificationsComponent implements OnInit {
     }
     });
 
-
-
   }
 
   arrayBufferToBase64(buffer) {
@@ -69,7 +65,6 @@ export class NotificationsComponent implements OnInit {
 
 
   AuthorizeAdmins(id, i) {
-    //this.modelHelp.Id = id;
     let fd = new FormData();
     fd.append('id', id);
     this.verifyService.authorizeAdmin(fd).subscribe(resp => {
@@ -84,7 +79,6 @@ export class NotificationsComponent implements OnInit {
 
   DeclineAdmins(id,i)
   {
-   // this.modelHelp.Id = id;
    let fd = new FormData();
     fd.append('id', id);
     this.verifyService.declineAdmin(fd).subscribe(resp => {
@@ -98,7 +92,6 @@ export class NotificationsComponent implements OnInit {
   }
 
   AuthorizeControllers(id, i) {
-    //this.modelHelp.Id = id;
     let fd = new FormData();
     fd.append('id', id);
     this.verifyService.authorizeController(fd).subscribe(resp => {
@@ -115,7 +108,6 @@ export class NotificationsComponent implements OnInit {
 
   DeclineControllers(id,i)
   {
-    //this.modelHelp.Id = id;
     let fd = new FormData();
     fd.append('id', id);
     this.verifyService.declineController(fd).subscribe(resp => {
@@ -129,7 +121,6 @@ export class NotificationsComponent implements OnInit {
   }
 
   AuthorizeUser(id, i) {
-    //this.modelHelp.Id = id;
     let fd = new FormData();
     fd.append('id', id);
     this.verifyService.authorizeUser(fd).subscribe(resp => {
@@ -144,7 +135,6 @@ export class NotificationsComponent implements OnInit {
   }
 
   DeclineUser(id, i) {
-   // this.modelHelp.Id = id;
    let fd = new FormData();
     fd.append('id', id);
     this.verifyService.declineUser(fd).subscribe(resp => {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketService } from 'src/app/services/ticketService/ticket.service';
-//import { TicketTypeModel } from 'src/app/models/ticketTypeModel';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-ticket-validation',
@@ -17,10 +17,15 @@ export class TicketValidationComponent implements OnInit {
   allTT: any ;
   myInput1: string = "";
   myInput : number ;
-  constructor(private ticketServ: TicketService) {
-    // this.ticketServ.getAllTicketTypes().subscribe(data => {
-    //   this.allTT = data;
-    // })
+  user : any;
+  prom : string = "PENDING";
+  constructor(private ticketServ: TicketService, private auth: AuthenticationService) {
+    this.auth.profile().subscribe(data => {
+
+      this.user = data;    
+      this.prom = this.user.activated;
+
+    });
    }
 
   ngOnInit() {
@@ -56,13 +61,9 @@ export class TicketValidationComponent implements OnInit {
                 this.ticketForV = null;
                 this.ticketMessageError = err.error.message;
               })
-              //this.ValidateTicketNoUser();
             }
   
         }
-        // else{
-        //   this.ticketExists = "Ticket doesn't exist in database!"
-      // }
       },
       err =>
       {
@@ -70,7 +71,6 @@ export class TicketValidationComponent implements OnInit {
         this.myInput = null;
         this.ticketForV = null;
         this.ticketExists = err.error.message;
-        //window.alert(err.error);
       });
     }
     
@@ -83,7 +83,6 @@ ValidateTicket(n:any)
   this.ticketMessage = "";
   this.ticketMessageError= "";
   
-  //let sl = {};// = new TicketTypeModel(n,this.ticketForV.Id);
 
   this.ticketServ.validateTicket(n,this.ticketForV).subscribe(data =>
     {
@@ -94,10 +93,10 @@ ValidateTicket(n:any)
       this.ticketRet = data;
       if(data.message == "Ticket is valid.")
       {
-        this.ticketMessage = data.message;//this.ticketRet.Message;
+        this.ticketMessage = data.message;
       }else
       {
-        this.ticketMessageError = data.message;//this.ticketRet.Message;
+        this.ticketMessageError = data.message;
       }
       
     },
@@ -110,6 +109,4 @@ ValidateTicket(n:any)
     })
 }
   
- 
-
 }

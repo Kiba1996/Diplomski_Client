@@ -60,16 +60,12 @@ export class BusmapsComponent implements OnInit {
         this.showCheckBoxes();
       });
 
-
-
-
     });
 
   }
   findStations(e : any[]) : StationModel[]
   {
     let ret :StationModel[] = [];
-    //let statPom : StationModel = new StationModel()
       e.forEach(element => {
        ret.push(this.stati.find(x => x._id == element));
       });
@@ -149,7 +145,7 @@ export class BusmapsComponent implements OnInit {
   showCheckBoxes(){
     console.log("sssss");
     this.myGroup = this.formBuilder.group({
-      linesWStations: new FormArray([]) //new FormArray(formControls)
+      linesWStations: new FormArray([]) 
     });
 
     this.addCheckBoxes();

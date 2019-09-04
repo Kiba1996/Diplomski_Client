@@ -4,17 +4,12 @@ import { PricelistServiceService } from 'src/app/services/priceListService/price
 
 import { PriceListModel } from 'src/app/model/pricelistModel';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-//import { TypeModel } from 'src/app/model/typeModel';
-//import { TicketModel } from 'src/app/model/ticketModel';
-//import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+
 import { NgForm } from '@angular/forms';
 //import { PayPalConfig } from 'ngx-paypal'
 import { IPayPalConfig,ICreateOrderRequest } from 'ngx-paypal';
 import { Router } from '@angular/router';
-//import { TicketTypeModel } from 'src/app/model/ticketTypeModel';
 import { ShowTicketsComponent } from '../show-tickets/show-tickets.component';
-//import { PayPalModel } from 'src/app/model/paypalModel';
-//import { TicketPomModel } from 'src/app/models/ticketPomModel';
 @Component({
   selector: 'app-buy-a-ticket',
   templateUrl: './buy-a-ticket.component.html',
@@ -27,7 +22,6 @@ export class BuyATicketComponent implements OnInit {
   selecetTT : number;
   priceList: any;
   dobavljanjePayPal: any;
- // validPrices: TicketPricesPomModel;
   price: number;
   discount: number;
   priceWDiscount: number;
@@ -82,8 +76,6 @@ export class BuyATicketComponent implements OnInit {
     });
     
 
-    // this.initConfig();
-
    }
 
   ngOnInit() {
@@ -98,7 +90,7 @@ setradio(sel)
   if(sel != 0)
   {
     this.selecetTT = sel;
-    let bla = new FormData();//= new TicketTypeModel(localStorage.getItem('name'), sel);
+    let bla = new FormData();
     bla.append("email",localStorage.getItem('name') );
     bla.append("ticketType",sel);
     this.ticketServ.checkValidity(bla).subscribe(data =>{
@@ -160,7 +152,7 @@ setradio(sel)
 
   UpisiKartu(neregistrovani: boolean) {
 
-    let payPalMod = new FormData();// = new PayPalModel(0);
+    let payPalMod = new FormData();
     payPalMod.append("payementId", this.dobavljanjePayPal.id);
     let pom = new Date(this.dobavljanjePayPal.create_time);
     pom.setHours(pom.getHours() + 2);
@@ -173,7 +165,6 @@ setradio(sel)
 
     console.log("PayPal model: ", payPalMod);
 
-   // let ticketMod = new FormData()// = new TicketModel("",new Date(),0,"",0,0);
     let b = new Date();
     b.setHours(b.getHours()+ 2);
     payPalMod.append("purchaseTime", new Date(b).toString());
@@ -214,17 +205,10 @@ setradio(sel)
     }
     
    
-
-    let tpom// = new TicketPomModel(ticketMod, payPalMod.PayementId);
     this.ticketServ.addPayPal(payPalMod).subscribe(data => {
-    //this.ticketServ.addTicket(tpom).subscribe(data => {
-     
-      
+    
         window.alert("Ticket successfully bought!")
-        //ShowTicketsComponent.returned.next(false);
-        //this.router.navigateByUrl('/show_tickets');
-       // this.router.navigate(['home']);
-     
+ 
     },
     err =>{
       window.alert(err.error)
@@ -239,94 +223,9 @@ setradio(sel)
       this.mailZaSlanje = t.Email;
       
       this.initConfig();
-      //this.boolZaOtvaranjeForme = false;
     }
     form.reset();
   }
-
-  // upisiKartuNew()
-  // {
-
-  //   let payPalMod = new FormData();// = new PayPalModel(0);
-  //   payPalMod.append("payementId", this.dobavljanjePayPal.id);
-  //   let pom = new Date(this.dobavljanjePayPal.create_time);
-  //   //pom.setHours(pom.getHours() + 2);
-  //   payPalMod.append("createTime", pom.toString());
-  //   payPalMod.append("payerEmail", this.dobavljanjePayPal.payer.email_address);
-  //   payPalMod.append("payerName", this.dobavljanjePayPal.payer.name.given_name);
-  //   payPalMod.append("payerSurname", this.dobavljanjePayPal.payer.name.surname);
-  //   payPalMod.append("currencyCode", this.dobavljanjePayPal.purchase_units[0].amount.currency_code);
-  //   payPalMod.append("value",  this.dobavljanjePayPal.purchase_units[0].amount.value);
-
-  //   console.log("PayPal model: ", payPalMod);
-
-  // //  let ticketMod// = new TicketModel("",new Date(),0,"",0,0);
-  //   let b = new Date();
-  //   b.setHours(b.getHours()+ 2);
-  //   payPalMod.append("purchaseTime", new Date(b).toString());
-    
-  //   let ticketType;
-  //   this.allTicketTypes.forEach(element => {
-  //     if(element.name == "Hourly" && this.selecetTT == 1){
-  //       ticketType = element._id;
-  //     }
-  //     if(element.name == "Daily" && this.selecetTT == 2){
-  //       ticketType = element._id;
-  //     }
-  //     if(element.name == "Monthly" && this.selecetTT == 3){
-  //       ticketType = element._id;
-  //     }
-  //     if(element.name == "Yearly" && this.selecetTT == 4){
-  //       ticketType = element._id;
-  //     }
-  //   });
-  //   payPalMod.append("ticketType", ticketType);
-  //   this.priceList.TicketPricess.forEach(element => {
-  //     if(element.TicketTypeId == this.selecetTT)
-  //     {
-  //       payPalMod.append("ticketPrices", element._id);
-  //     }
-  //   });
-  //   payPalMod.append('user', this.user._id);
-
-  //   // if(this.mailZaSlanje != "" && this.mailZaSlanje != undefined && this.mailZaSlanje != null){
-  //   //   payPalMod.append("name", this.mailZaSlanje);
-     
-  //   // }else{
-  //   //   payPalMod.append("name", this.korisceniEmail);
-  //   // }
-  //   let tpom// = new TicketPomModel(ticketMod, payPalMod.PayementId);
-  //   this.ticketServ.addPayPal(payPalMod).subscribe(data => {
-  //    // this.ticketServ.addTicket(tpom).subscribe(data => {
-        
-  //       window.alert("Ticket successfully bought!");
-
-  //         // this.ticketServ.SendMail(ticketMod).subscribe(resp =>{
-  //         //   if(resp == 'Ok'){
-  //         //    window.alert("Ticket successfully bought!")
-  //         //     this.router.navigateByUrl('/home');
-  //         //   }
-  //         //   else{
-  //         //     alert("Something went wrong");
-  //         //     this.router.navigateByUrl('/home');
-  //         //   }
-  //         // });
-       
-
-  //       // window.alert("Ticket successfully bought!")
-  //       // this.router.navigate(['home']);
-  //     },
-  //     err =>{
-  //       window.alert(err.error)
-  //       console.log(err);
-  //     });
-      
-      
-  // }
-
-
-  
-
 
   private initConfig(): void {
     var diffDays =this.priceWDiscount;
@@ -405,6 +304,4 @@ setradio(sel)
 }
 
 
-
- 
 }

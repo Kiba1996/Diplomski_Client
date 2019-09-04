@@ -1,65 +1,74 @@
-<!-- <div class="container">
-    <div class="row">
-      
-       <div class="col-md-6">
-  
-        <h1 class="form-signin-heading">Your profile</h1>
-  
-        <div class="form-horizontal">
-          <div class="form-group">
-            <label class="col-sm-3 control-label">Full name</label>
-            <p class="form-control-static">{{ details?.name }}</p>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-3 control-label">Email</label>
-            <p class="form-control-static">{{ details?.email }}</p>
-          </div>
-        </div>
-  
-      </div>
-  
-    </div>
-  </div> -->
-
-  <div class="container-fluid" >
+<div class="container-fluid" >
     <div *ngIf="user != null">
   <br/>
   <br/>
   <br/>
   
-  <div class="container rounded" style="border:1px solid black; width: 700 ;"  *ngIf="!otvorenEdit" >
-    <div class="row rounded align-items-center" style="border:1px solid black; background-color: rgb(141, 156, 150)"><br/>
-        <div class=" col-sm-6 col-md-4 align-items-center rounded">
-            <img style="margin: auto; display: block; width: 350px; height: 400px; border-radius: 50%" src="/assets/profile.png" alt="" class="img-rounded img-responsive " />
-        </div>
-        <div  class="col-sm-6 col-md-8 align-items-left rounded">
-          <br/>
-            <h4 style="font-size: 35px; font-family: 'Gill Sans'">
-                {{user?.name}} {{user?.surname}}</h4>
-            <small><cite title={{user?.Address}}>{{user?.address}} <img src="/assets/markerIcon1.png" alt=""   style="height: 1cm; width: 1cm"/></cite></small>
-            <p style="font-size: 30px; font-family: 'Gill Sans'">
-              
-                <img src="/assets/letterIcon.png" alt=""   style="height: 1cm; width: 1cm"/>{{user?.email}}
-                <br />
-               
-                <img src="/assets/birthdayImage.png" alt=""   style="height: 1cm; width: 1cm"/>{{birt}}
-                <br/>
-               
-               
-            </p>
-            <label style="font-size: 35px; font-family: 'Gill Sans'">{{user?.activated}}   </label> 
-           
-              <label  *ngIf="accBool && nijeUser" style="font-size: 35px; font-family: 'Gill Sans'">|  </label>
-                <button *ngIf="accBool && nijeUser"  class="btn btn-primary btn-lg" style="background-color: #5bd6cc" type="submit" (click)="Resend()" >Resend request</button>  <br/>
-           
+  <div class="container rounded" style="border:1px solid black;  "  *ngIf="!otvorenEdit" >
+      <div class="row rounded align-items-center" style="border:1px solid black; background-color: #2c3a4d"><br/>
+        
+        <div  class="col align-items-left rounded">
+            <br/>
+            <div class="row">
+                <div class="col" style="border-bottom: 1px solid black" >
+                    <h4 style="font-size: 35px; "> <i class="fas fa-id-badge fa-fw"></i>  Name     </h4>
+                </div>
+                <div class="col" style="align-content: left; text-align: left; border-bottom: 1px solid black">
+                        <h4 style="font-size: 35px; "> {{user?.name}} {{user?.surname}}   </h4>
+                </div>  
+            </div>
+            <div class="row">
+                <div class="col" style="border-bottom: 1px solid black" >
+                        <small><label title={{user?.Address}}><i class="fas fa-map-marker-alt fa-fw"></i> Address   </label></small>
+                </div>
+                <div class="col" style="align-content: left; text-align: left; border-bottom: 1px solid black">
+                        <small><label> {{user?.address}} </label></small>
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col" style="border-bottom: 1px solid black">
+                 <p style="font-size: 30px;"> <i class="fas fa-at fa-fw"></i> E-mail   </p>
+                </div>
+                <div class="col" style="align-content: left; text-align: left; border-bottom: 1px solid black">
+                     <p style="font-size: 30px;"> {{user?.email}} </p>
+                </div> 
+            </div>
+           <div class="row">
+                <div class="col" style="border-bottom: 1px solid black">
+                 <p style="font-size: 30px;"> <i class="fas fa-birthday-cake fa-fw"></i> Birthday </p>
+                </div>
+                <div class="col" style="align-content: left; text-align: left; border-bottom: 1px solid black">
+                    <p style="font-size: 30px;">{{birt}}</p>    
+                </div> 
+                 
+           </div>
+           <div class="row">
+                <div class="col" style="border-bottom: 1px solid black">
+                    <label style="font-size: 35px;"> <i class="fas fa-check fa-fw"></i> Status </label>
+                </div>
+                <div class="col" style="align-content: left; text-align: left; border-bottom: 1px solid black">
+                    <label style="font-size: 35px;">  {{user?.activated}}</label>
+                     <label style="color: transparent">|</label>
+                     <div style="text-align: left;">
+                        <button *ngIf="accBool && nijeUser"  class="btn" style="background-color: #ff9955" type="submit" (click)="Resend()" >Resend request</button> 
+                    </div>
+                </div>      
+        </div>    
+         <div  class="col  rounded" style="text-align: center">
+           <div style="text-align: center; margin-top: 10px">
+                <button class="btn" style="background-color: #ff9955;" type="submit" (click)="Edit()" >Edit profile</button>  
+            </div>
+            </div>  
+                     
    <br/>
    <br/>
-    
-    <button class="btn btn-primary btn-lg" style="background-color: #5bd6cc" type="submit" (click)="Edit()" >Edit profile</button> <br/>
-  <br/>
-    <br/>
+  
   </div>
-  </div>
+ 
+</div>
+
+
+  
   </div>
   </div>
   </div>

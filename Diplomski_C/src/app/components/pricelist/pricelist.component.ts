@@ -15,9 +15,10 @@ export class PricelistComponent implements OnInit {
   validPrices: TicketPricesPomModel;
   pocDatum: string = "";
   endDatum: string = "";
+  empty: string = "";
     constructor( private pricelistServ: PricelistServiceService) { 
       this.pricelistServ.getPricelist().subscribe(data => {
-        
+        this.empty = "";
         this.priceList = data; 
          console.log(data);
         
@@ -38,27 +39,10 @@ export class PricelistComponent implements OnInit {
               this.validPrices.Yearly = ticketPrices[3].price;
            });
   
-
-           //  this.priceList.TicketPricess.forEach(element => {
-        //   if(element.TicketTypeId == 2)
-        //   {
-        //     this.validPrices.Daily = element.Price;
-        //   }
-        //   if(element.TicketTypeId == 1)
-        //   {
-        //     this.validPrices.Hourly = element.Price;
-        //   }
-        //   if(element.TicketTypeId == 3)
-        //   {
-        //     this.validPrices.Monthly = element.Price;
-        //   }
-        //   if(element.TicketTypeId == 4)
-        //   {
-        //     this.validPrices.Yearly = element.Price;
-        //   }
-          
-        // });
       }
+      }, err=>
+      {
+        this.empty = "There is no a valid pricelist at this moment!";
       });
        
     }

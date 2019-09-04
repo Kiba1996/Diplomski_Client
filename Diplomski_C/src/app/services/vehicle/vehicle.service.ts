@@ -52,24 +52,4 @@ export class VehicleService {
     return this.request('delete', 'removeVehicle',null ,vId);   
   }
 
-
-
-
-  // getAllVehicles() {
-  //   return this.httpClient.get(this.base_url+"/api/Vehicles/GetVehicles");
-  // }
-
-  // addVehicle(vehicle): Observable<any>{
-
-  //   return this.httpClient.post(this.base_url+"/api/Vehicles/Add",vehicle);
-  // }
-
-  // GetAllAvailableVehicles(): Observable<any>{
-  //   return this.httpClient.get(this.base_url+"/api/Vehicles/GetAvailableVehicles");
-  // }
-
-  // deleteVehicle(id){
-
-  //   return this.httpClient.delete(this.base_url+"/api/Vehicles/Delete?id=" + id);
-  // }
 }

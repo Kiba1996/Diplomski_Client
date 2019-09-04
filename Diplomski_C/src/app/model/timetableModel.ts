@@ -7,14 +7,14 @@ export class TimetableModel{
     LineId: string;
     DayTypeId: string;
     Vehicles: VehicleModel[];
-    
-    constructor( name: string, lId: string,dId: string,id: string ){
+    Version : number;
+    constructor( name: string, lId: string,dId: string,id: string,v?: number ){
         this.Id = id;
         this.Departures = name;
        
         this.LineId = lId;
         this.DayTypeId = dId;
         this.Vehicles = [];
-      
+        this.Version = v;
     }
 }

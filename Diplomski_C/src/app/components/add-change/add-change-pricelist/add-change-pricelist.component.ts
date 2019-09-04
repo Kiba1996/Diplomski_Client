@@ -30,9 +30,6 @@ endDatum: string = "";
   let priceL : any;
   let bol : boolean = false;
   this.ticketPricesPom.PriceList = pm;
-  
-  // pm.StartOfValidity.setHours(23,59,59);
-  // pm.EndOfValidity.setHours(23,59,59);
 
     this.pricelistServ.addPricelist(this.ticketPricesPom).subscribe(data =>
       {
@@ -96,32 +93,14 @@ endDatum: string = "";
             this.validPrices.Yearly = ticketPrices[3].price;
          });
 
-        
-      //  this.priceList.TicketPricess.forEach(element => {
-        
-      //   if(element.TicketTypeId == 2)
-      //   {
-      //     this.validPrices.Daily = element.Price;
-      //   }
-      //   if(element.TicketTypeId == 1)
-      //   {
-      //     this.validPrices.Hourly = element.Price;
-      //   }
-      //   if(element.TicketTypeId == 3)
-      //   {
-      //     this.validPrices.Monthly = element.Price;
-      //   }
-      //   if(element.TicketTypeId == 4)
-      //   {
-      //     this.validPrices.Yearly = element.Price;
-      //   }
-        
-      // });
     }
     else {
       this.validPrices = new TicketPricesPomModel(0,0,0,0,0,new PriceListModel(null,null,0, []));
     }
 
+     },
+     err=>{
+        
      });
   }
 

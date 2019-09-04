@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TicketService } from 'src/app/services/ticketService/ticket.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
-//import { TicketHelpModel } from 'src/app/models/ticketHelpModel';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
@@ -13,7 +12,7 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 export class ShowTicketsComponent implements OnInit {
 
   uniqueName : string = "";
-  prikazKarata : boolean = false;
+  prikazKarata : boolean = true;
   allTickets: any  = [];
   blaa: any = [];
   allTTypes: any = [];
@@ -38,7 +37,7 @@ export class ShowTicketsComponent implements OnInit {
   }
 
   prikazi(){
-    this.prikazKarata = false;
+    this.prikazKarata = true;
     this.uniqueName = localStorage.getItem('name');
     if(this.uniqueName == "" || this.uniqueName == null)
     {
@@ -48,6 +47,11 @@ export class ShowTicketsComponent implements OnInit {
       this.allTickets = [];
       this.prikazKarata = true;
       this.allTickets = data;
+      if(this.allTickets == [] || this.allTickets == null || this.allTickets.length == 0){
+        this.prikazKarata  = false;
+      }else{
+        this.prikazKarata = true;
+      }
       this.ticketServ.getAllTicketTypes().subscribe(allTT => {
         this.allTTypes = allTT;
         

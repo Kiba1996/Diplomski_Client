@@ -16,17 +16,13 @@ interface TokenResponse {
 })
 export class AccountService {
   private token: string;
-
-  
-
   constructor(private http: HttpClient, private router: Router) { }
 
   private saveToken(token: string): void {
     localStorage.setItem('mean-token', token);
     this.token = token;
   }
-
-
+  
   private getToken(): string {
     if (!this.token) {
       this.token = localStorage.getItem('mean-token');
@@ -35,26 +31,14 @@ export class AccountService {
   }
 
   private request(method: 'get'| 'post', type: 'getPassengerTypes' | 'resendReqest', u?:FormData): Observable<any> {
-    let base;
+   let base;
     if(method==='post'){
      return base = this.http.post(`/api/${type}`,u);
     }
     else{
       return base = this.http.get(`/api/${type}`).pipe();
     }
-     
-    
-
-    // const request = base.pipe(
-    //   map((data: TokenResponse) => {
-    //     if (data.token) {
-    //       this.saveToken(data.token);
-    //     }
-    //     return data;
-    //   })
-    // );
-
-    // return request;
+   
   }
 
   public getPassengerTypes(): Observable<any> {

@@ -9,7 +9,6 @@ import { TimetableService } from 'src/app/services/timetable/timetable.service';
 })
 export class TimetableComponent implements OnInit {
   allLines: any = [];
- // allDayTypes: any = [];
   allTimetables: any = [];
   showList: any = [];
   dt: any;
@@ -38,14 +37,8 @@ export class TimetableComponent implements OnInit {
         })
       });
 
-    });
-
-    
-    
-
-    
+    });    
   }
-
 
   ngOnInit() {
   }
@@ -111,10 +104,6 @@ export class TimetableComponent implements OnInit {
       else {
         this.allLines.forEach(element => {
           k = false;
-          // k = ll.find( g =>{
-          //   g.LineId == element.Id;
-          // });
-    
           ll.forEach(d => {
             if(d.line == element._id)
             {
@@ -137,12 +126,10 @@ export class TimetableComponent implements OnInit {
   if(this.lineIdChoosen != event.target.value)
   {
     this.lineIdChoosen = event.target.value;
-    if(event.target.value != 0){
-   
-      
+    if(event.target.value != 0)
+    {
       this.boolic = true;
-      
-        this.SplitDepartures();
+      this.SplitDepartures();
     }
     else
     {
@@ -167,7 +154,6 @@ SplitDepartures(){
   });
 
   console.log(this.stringovi1);
-  
 
 }
 

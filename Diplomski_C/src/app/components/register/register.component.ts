@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
 
     },
     err => {
-      console.log(err);
+      console.log(err.error.message);
     });
   }
 
@@ -72,12 +72,12 @@ export class RegisterComponent implements OnInit {
     this.auth.register(this.formd).subscribe(() => { //this.credentials
       this.router.navigateByUrl('/login');
     }, (err) => {
-      console.error(err);
+      console.error(err.error.message);
     });
   }
 
   Button() {
-   
+   this.formd = new FormData();
     this.formd.append("name",this.registerForm.value.Name);
     this.formd.append("surname",this.registerForm.value.Surname);
     this.formd.append("email",this.registerForm.value.Email);
@@ -107,35 +107,7 @@ export class RegisterComponent implements OnInit {
    this.formd.append("file",this.selectedImage, this.selectedImage.name);
       console.log("korisnik kog saljem: ", this.formd);
       this.register();
-      // this.fileUploadService.uploadFile(this.selectedImage)
-      //    .subscribe(data => { 
-      //     this.accountService.register(regModel).subscribe(
-      //       ret => {
-      //         this.serverErrors = [];
-      //         console.log("ret", ret);
-      //         if(ret == "sve je ok")
-      //         {
-      //           this.notificationServ.sendNotificationToController();
-      //           this.router.navigateByUrl('/signin');
-      //         }
-      //         else
-      //         {
-      //           console.log("nesto nece d posalje notifikaciju");
-      //           this.router.navigateByUrl('/signin');
-      //         }
-                
-      //       },
-      //       err => {
-      //         console.log(err);
-      //         window.alert(err.error.ModelState[""]);
-      //         this.serverErrors = err.error.ModelState[""]
-      //       }
-      //     );
-      //    },
-      //    err => {
-      //     window.alert(err.error);
-      //    });
-
+      
     }
   }
 

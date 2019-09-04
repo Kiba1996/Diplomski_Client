@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-//import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LineModel } from 'src/app/model/lineModel';
@@ -11,7 +10,7 @@ export class LineServiceService {
 
   base_url = "http://localhost:52295"
   private token: string;
-  constructor( private httpClient:HttpClient) { } //private http: Http,
+  constructor( private httpClient:HttpClient) { } 
 
   private request(method: 'post'|'get'|'delete', type: 'addLine'|'getAllLines'|'changeLine'|'removeLine'|'findVehicleId', user?: LineModel, stId?: any): Observable<any> {
     let base;
@@ -21,7 +20,8 @@ export class LineServiceService {
       if(type ==='changeLine'){
         base=this.httpClient.post(`/api/${type}/`+stId, user);
       }
-    } else if(method === 'get') {
+    } 
+    else if(method === 'get') {
       base = this.httpClient.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
       if(type === 'findVehicleId'){
         base =  this.httpClient.get(`/api/${type}`, {headers: { Authorization: `Bearer ${this.getToken()}` },params: {ids:stId}});
@@ -30,19 +30,6 @@ export class LineServiceService {
     else {
       base= this.httpClient.delete(`/api/${type}/`+ stId);
     }
-
-    // const request = base.pipe(
-    //   map((data: TokenResponse) => {
-    //     if (data.token) {
-    //       if( type === 'login')
-    //       {
-    //         this.saveToken(data.token);
-    //       }
-          
-    //     }
-    //     return data;
-    //   })
-    // );
 
     return base;
   }
@@ -68,30 +55,13 @@ export class LineServiceService {
     return this.token;
   }
 
-  // addLine(line): any{
-    
-  //   return this.httpClient.post(this.base_url+"/api/Lines/Add",line);
-  // }
-
+  FindVehicleId(id): Observable<any>{
+    return this.request('get', 'findVehicleId',null ,id);
+  }
   addSerialNumber(line): Observable<any>{
     
     return this.httpClient.post(this.base_url+"/api/Lines/SerialNumber",line);
   }
 
-  // getAllLines() {
-  //   return this.httpClient.get(this.base_url+"/api/Lines/GetLines");
-  // }
-
-  // deleteLine(id){
-    
-  //   return this.httpClient.delete(this.base_url+"/api/Lines/Delete?id=" + id);
-  // }
-
-  // changeLine(id,line): Observable<any>{
-    
-  //   return this.httpClient.put(this.base_url+"/api/Lines/Change?id=" + id,line);
-  // }
-  FindVehicleId(id): Observable<any>{
-    return this.request('get', 'findVehicleId',null ,id);
-  }
+ 
 }

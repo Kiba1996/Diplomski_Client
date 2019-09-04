@@ -43,15 +43,10 @@ export class RegAdminContComponent implements OnInit {
   }
 
 
-  
- 
-//private notificationServ: NotificationService,
 
   constructor(private fb: FormBuilder, private accountService: AuthenticationService, private router: Router) { 
  
   }
-
-
 
   ngOnInit() {
   }
@@ -61,49 +56,25 @@ export class RegAdminContComponent implements OnInit {
     this.accountService.register(this.formd).subscribe(() => {
       this.router.navigateByUrl('/login');
     }, (err) => {
-      console.error(err);
+      console.error(err.error.message);
     });
   }
 
   Button1() {
-    let regModel: RegModel = this.registerForm.value;
-    let formData: FormData = new FormData();
+   let regModel: RegModel = this.registerForm.value;
+   this.formd = new FormData();
+   this.formd.append("name",this.registerForm.value.Name);
+   this.formd.append("surname",this.registerForm.value.Surname);
+   this.formd.append("email",this.registerForm.value.Email);
+   this.formd.append("password",this.registerForm.value.Password);
+   this.formd.append("address",this.registerForm.value.Address);
+   this.formd.append("birthday",this.registerForm.value.Birthday);
+   this.formd.append("role", this.registerForm.value.Role);
+   this.formd.append("activated","PENDING");
 
+   this.register();
 
-    this.formd.append("name",this.registerForm.value.Name);
-    this.formd.append("surname",this.registerForm.value.Surname);
-    this.formd.append("email",this.registerForm.value.Email);
-    this.formd.append("password",this.registerForm.value.Password);
-    this.formd.append("address",this.registerForm.value.Address);
-    this.formd.append("birthday",this.registerForm.value.Birthday);
-    this.formd.append("role", this.registerForm.value.Role);
-    this.formd.append("activated","PENDING");
-
-   
-   
-    this.register();
-
-   
-    // this.accountService.register(regModel).subscribe(
-    //   ret => {
-    //     this.serverErrors = [];
-    //     this.notificationServ.sendNotification();
-    //     this.router.navigateByUrl('/signin');
-
-    //   },
-    //   err => {
-    //     console.log(err);
-    //     window.alert(err.error.ModelState[""]);
-    //     this.serverErrors = err.error.ModelState[""]
-
-    //   }
-    // );
-    
-   
-
-    
   }
-
 
 }
 

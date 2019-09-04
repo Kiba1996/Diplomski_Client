@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-//import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -45,11 +44,10 @@ export class TicketService {
   public getAllTicketTypes(): Observable<any> {
     return this.request('get', 'getAllTicketTypes');
   }
-public getTicketPrice(fd: any): Observable<any>{
-  return this.request('get', 'getTicketPrice', null,fd);
-}
+  public getTicketPrice(fd: any): Observable<any>{
+    return this.request('get', 'getTicketPrice', null,fd);
+  }
 
-  
   public getTypeUser(email : any): Observable<any> {
     return this.request('get','getTypeUser',null,email);
   }

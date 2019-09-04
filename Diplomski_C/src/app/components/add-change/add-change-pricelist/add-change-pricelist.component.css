@@ -1,0 +1,20 @@
+.label{
+    color: #ff9955;
+}
+
+.btn{
+    background-color: #ff9955;
+    color: rgb(255, 255, 255);
+    border:  #ff9955;
+    font-size: 20px;
+    
+}
+.btn:hover, .btn-:focus, .btn:active, .btn.active, .open .dropdown-toggle.btn {
+ 
+    background-color: #f5731c;
+    border-color: #f5731c;
+     
+    }
+    .container{
+        color: #ff9955;
+    }

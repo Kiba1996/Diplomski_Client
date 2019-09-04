@@ -34,7 +34,7 @@ depart: string = "";
 vehicleId: any;
 availableVehicles: any = [];
 chooseVehicle: boolean = false;
-ttZaDodavanje : TimetableModel = new TimetableModel("", "", "","");
+ttZaDodavanje : TimetableModel = new TimetableModel("", "", "","",0);
 daySelected : string = "0";
 lineSelected: string = "0";
 MyInput: Time;
@@ -197,7 +197,6 @@ SelectedLine(event: any): void
 {
   this.lineIdChoosen = event.target.value;
   if(event.target.value != 0){
-   // let k = parseInt(event.target.value,10);
     this.lineServ.FindVehicleId(this.lineIdChoosen).subscribe(data1 =>{
     
         this.vehicleId = data1;
@@ -239,7 +238,7 @@ SelectedVehicle(event: any): void
 SplitDepartures(){
 
   this.stringovi1 = [];
-  this.ttZaDodavanje = new TimetableModel("","","","");
+  this.ttZaDodavanje = new TimetableModel("","","","",0);
   this.allTimetables.forEach(element => {
     if(element.line == this.lineIdChoosen && element.dayType == this.dt)
     {
@@ -248,6 +247,7 @@ SplitDepartures(){
       this.ttZaDodavanje.LineId = element.line;
       this.ttZaDodavanje.Vehicles = element.vehicle;
       this.ttZaDodavanje.Id = element._id;
+      this.ttZaDodavanje.Version = element.__v;
     }
     
   });
@@ -298,7 +298,7 @@ ChangeTimetable()
         this.refresh();
       },
       err => {
-        window.alert(err.error);
+        window.alert(err.error.message);
         this.refresh();
        
 
@@ -322,7 +322,7 @@ AddTimetable(){
       this.refresh();
     },
     err => {
-      window.alert(err.error);
+      window.alert(err.error.message);
       this.refresh();
      
 
@@ -342,13 +342,13 @@ DeleteTimetable()
     this.refresh();
   },
   err => {
-    window.alert(err.error);
+    window.alert(err.error.message);
     this.refresh();
   });
 }
 
 refresh(){
-  this.ttZaDodavanje = new TimetableModel("","","","");
+  this.ttZaDodavanje = new TimetableModel("","","","",0);
   this.selectedDay = false;
         this.daySelected = "0";
         this.lineSelected = "0";

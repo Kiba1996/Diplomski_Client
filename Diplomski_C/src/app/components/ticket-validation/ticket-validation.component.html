@@ -1,34 +1,32 @@
-<div style="align-items: center; ">
+<div *ngIf="prom == 'ACTIVATED'" style="align-items: center; ">
     <div class="container" style="text-align: center; width:70% ;">
       <br/>
-      <h2  style=" color: #d7dfde;">~ Ticket validation ~</h2>
+      <h2  style=" color: #ff9955;"> Ticket validation </h2>
       <br/>
-      <label style="font-size: 22px; color:#5bd6cc;">Ticket ID:</label><br/>
+      <label style="font-size: 22px; color:#ff9955;">Ticket ID:</label><br/>
       <input type="text" name="ticketId" [(ngModel)]="myInput" placeholder="Ticket ID" style="width: 50%">
       <br/>
       <br/>
-      <button name="butoon1" class="btn btn-primary btn-lg" (click)="FindTicket(myInput)">Find ticket</button>
+      <button name="butoon1" class="btn" (click)="FindTicket(myInput)">Find ticket</button>
       <br/>
       <br/>
   
-      <span class="badge badge-danger" style="font-size: 22px; font-family: 'Gill Sans'" >{{ticketExists}}</span>
-      <!-- <label>{{ticketExists}}</label><br/> -->
-  
+      <span class="badge badge-danger" style="font-size: 22px; " >{{ticketExists}}</span>
+      
       <div *ngIf="ticketForV">
         <div *ngIf="ticketForV.user && ticketForV.user != ''">
-          <label style="font-size: 22px; color:#5bd6cc;">User email:</label><br/>
+          <label style="font-size: 22px; color:#ff9955;">User email:</label><br/>
           <input type="text" name="userEmail" [(ngModel)] = "myInput1" placeholder="User email" style="width: 50%" >
           <br/>
           <br/>
-          <button name="butoon2" (click)="ValidateTicket(myInput1)" class="btn btn-primary btn-lg">Validate</button>
+          <button name="butoon2" (click)="ValidateTicket(myInput1)" class="btn">Validate</button>
           <br/>
           <br/>
         </div>
       </div>
   <br/>
-      <span class="badge badge-success" style="font-size: 22px; font-family: 'Gill Sans'" >{{ticketMessage}}</span>
-      <span class="badge badge-danger" style="font-size: 22px; font-family: 'Gill Sans'" >{{ticketMessageError}}</span>
+      <span class="badge badge-success" style="font-size: 22px; " >{{ticketMessage}}</span>
+      <span class="badge badge-danger" style="font-size: 22px; " >{{ticketMessageError}}</span>
   
-      <!-- <label>{{ticketMessage}}</label> -->
     </div>
   </div>

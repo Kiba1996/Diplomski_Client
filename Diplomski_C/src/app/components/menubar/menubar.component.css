@@ -1,16 +1,35 @@
-.navbar-custom .navbar-links-custom li {
-    padding: 0 5px 0 15px;
-    position:relative;
-  }
-
-  .navbar-custom .navbar-links-custom li:before{
-    content: " | ";;
-  position: absolute;
-  left:0;
-  top:10px;
+nav{
+  background-color: transparent;
+  font-size: 20px;
+  border-bottom-style: solid;
+  border-bottom-color: #ff9955;
+  border-bottom-width: 2px;
 }
 
+.navbar-nav li a{
+  color: #ff9955;
+}
+.navbar-nav li a i{
+  color:  #ff9955;
+}
+.navbar-toggler{
+  color: #ff9955;
+  background-color: #ff9955;
+}
 
+.nav-item .dropdown{
+  color: #ff9955;
+  background-color: transparent;
+}
+
+.dropdown-menu{
+  background-color: #ff9955;
+  border: #ff9955;
+  color:  #19191a;
+}
+.dropdown-item{
+  color:  #19191a !important;
+}
 
 .btn:hover {
     color: black;

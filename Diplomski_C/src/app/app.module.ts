@@ -44,7 +44,6 @@ import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
 import { NgxPayPalModule } from 'ngx-paypal';
 
-//gard
 
 const routes: Routes = [
   {

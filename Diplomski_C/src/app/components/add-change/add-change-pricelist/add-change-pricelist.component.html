@@ -1,11 +1,11 @@
 <div class="container" style="text-align: center; width:70% ;">
 
     <br/>
-    <h2  style=" color: #d7dfde;">~ Add pricelist ~</h2>
+    <h2  style=" color: #ff9955;"> Add pricelist </h2>
     <br/>
   
   <div *ngIf="priceList">
-    <label style="font-size: 20px; color:#5bd6cc">The price list is valid from  <b>{{pocDatum}}</b>  till  <b>{{endDatum}}</b></label>
+    <label style="font-size: 20px; color:#ff9955">Pricelist is valid from:  <b>{{pocDatum}}</b>  untill  <b>{{endDatum}}</b></label>
     <br/>
     <br/>
   </div>
@@ -16,42 +16,42 @@
     <!--  -->
     <div *ngIf="validPrices && !datumVazenjaBool" >
        
-      <label style="font-size: 18px; color:#d7dfde" >Hourly ticket:</label>
+      <label style="font-size: 18px; color:#ff9955" >Hourly ticket:</label>
       <input class="form-control" type="number" name="Hourly"   [(ngModel)] = "validPrices.Hourly"> <br/>
-      <label style="font-size: 18px; color:#d7dfde">Daily ticket:</label>
+      <label style="font-size: 18px; color:#ff9955">Daily ticket:</label>
       <input class="form-control" type="number" name="Daily"  [(ngModel)] = "validPrices.Daily"><br/>
-      <label style="font-size: 18px; color:#d7dfde">Monthly ticket:</label>
+      <label style="font-size: 18px; color:#ff9955">Monthly ticket:</label>
       <input class="form-control" type="number" name="Monthly"  [(ngModel)] = "validPrices.Monthly"><br/>
-      <label style="font-size: 18px; color:#d7dfde">Yearly ticket:</label>
+      <label style="font-size: 18px; color:#ff9955">Yearly ticket:</label>
       <input class="form-control" type="number" name="Yearly"  [(ngModel)] = "validPrices.Yearly"><br/>
-      <button *ngIf="!datumVazenjaBool" type="submit" class="btn btn-primary">Add new prices</button>
+      <button *ngIf="!datumVazenjaBool" type="submit" class="btn">Add new prices</button>
     </div>
   
 </form>
 </div>
 <br/>
   <div *ngIf="datumVazenjaBool" style="width:40%">
-    <label style="font-size: 20px; color:#5bd6cc" >Prices for new pricelist: </label> <br/>
-      <label style="font-size: 18px; color:#d7dfde; padding-right:7px;">Hourly ticket: </label> 
-      <label style="font-size: 18px; color:#5bd6cc; padding-right:7px; ">{{ticketPricesPom.Hourly}}</label>
-      <label style="font-size: 18px; color:#d7dfde; padding-right:7px;"> RSD</label><br/>
-      <label style="font-size: 18px; color:#d7dfde; padding-right:7px;">Daily ticket: </label> 
-      <label style="font-size: 18px; color:#5bd6cc; padding-right:7px;">{{ticketPricesPom.Daily}}</label>
-      <label style="font-size: 18px; color:#d7dfde; padding-right:7px;"> RSD</label><br/>
-      <label style="font-size: 18px; color:#d7dfde; padding-right:7px;">Monthly ticket: </label> 
-      <label style="font-size: 18px; color:#5bd6cc; padding-right:7px;">{{ticketPricesPom.Monthly}}</label>
-      <label style="font-size: 18px; color:#d7dfde; padding-right:7px;"> RSD</label><br/>
-      <label style="font-size: 18px; color:#d7dfde; padding-right:7px;">Yearly ticket: </label>
-      <label style="font-size: 18px; color:#5bd6cc; padding-right:7px;">{{ticketPricesPom.Yearly}}</label>
-      <label style="font-size: 18px; color:#d7dfde; padding-right:7px;"> RSD</label><br/>
+    <label style="font-size: 20px; color:#ff9955" >Prices for new pricelist: </label> <br/>
+      <label style="font-size: 18px; color:#f5cdb3; padding-right:7px;">Hourly ticket: </label> 
+      <label style="font-size: 18px; color:#ff9955; padding-right:7px; ">{{ticketPricesPom.Hourly}}</label>
+      <label style="font-size: 18px; color:#f5cdb3; padding-right:7px;"> RSD</label><br/>
+      <label style="font-size: 18px; color:#f5cdb3; padding-right:7px;">Daily ticket: </label> 
+      <label style="font-size: 18px; color:#ff9955; padding-right:7px;">{{ticketPricesPom.Daily}}</label>
+      <label style="font-size: 18px; color:#f5cdb3; padding-right:7px;"> RSD</label><br/>
+      <label style="font-size: 18px; color:#f5cdb3; padding-right:7px;">Monthly ticket: </label> 
+      <label style="font-size: 18px; color:#ff9955; padding-right:7px;">{{ticketPricesPom.Monthly}}</label>
+      <label style="font-size: 18px; color:#f5cdb3; padding-right:7px;"> RSD</label><br/>
+      <label style="font-size: 18px; color:#f5cdb3; padding-right:7px;">Yearly ticket: </label>
+      <label style="font-size: 18px; color:#ff9955; padding-right:7px;">{{ticketPricesPom.Yearly}}</label>
+      <label style="font-size: 18px; color:#f5cdb3; padding-right:7px;"> RSD</label><br/>
       <br/>
       <form #pricelistForm="ngForm" (ngSubmit)="onSubmit(pricelistForm.value,pricelistForm)">
           <div>
-            <label style="font-size: 18px; color:#d7dfde;">Start of validity:</label>
+            <label style="font-size: 18px; color:#f5cdb3;">Start of validity:</label>
             <input class="form-control" type="date" name="StartOfValidity" ngModel><br/>
-            <label style="font-size: 18px; color:#d7dfde;">End of validity:</label>
+            <label style="font-size: 18px; color:#f5cdb3;">End of validity:</label>
             <input class="form-control" type="date" name="EndOfValidity" ngModel><br/>
-            <button type="submit" class="btn btn-primary">Add validity of pricelist</button>
+            <button type="submit" class="btn">Add validity of pricelist</button>
           </div>
         </form>
   </div>

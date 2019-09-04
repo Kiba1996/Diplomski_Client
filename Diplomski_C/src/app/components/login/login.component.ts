@@ -26,7 +26,7 @@ formd: FormData = new FormData();
   }
 
   onSignIn(loginData: RegModel, form:NgForm){
-    //if(this.validations.validate(loginData)) return;
+    this.formd=new FormData();
     this.formd.append("email",loginData.Email);
     this.formd.append("password",loginData.Password);
    
@@ -40,31 +40,11 @@ formd: FormData = new FormData();
           localStorage.setItem('name', user.email);
         });
 
-        // console.log(res.access_token);
-
-        // let jwt = res.access_token;
-        // let jwtData = jwt.split('.')[1]
-        // let decodedJwtJasonData = window.atob(jwtData)
-        // let decodetJwtData = JSON.parse(decodedJwtJasonData)
-
-        // let rola = decodetJwtData.role
-
-        // // console.log('jwtData: ' + jwtData)
-        // // console.log('decodedJwtJsonData: ' + decodedJwtJasonData)
-        // // console.log(decodetJwtData)
-        // console.log('Role: ' + rola)
-        // let a = decodetJwtData.unique_name
-        // localStorage.setItem('jwt', jwt)
-        // localStorage.setItem('role', rola)
-        // console.log("iz storagea");
-        // console.log(localStorage.getItem('role'))
-        // localStorage.setItem('name',a);
-        // //window.location.href = "/home"
         this.router.navigateByUrl('/home');
         
       },
       error => {
-        console.log(error)
+        console.log(error.error.message)
         alert("Wrong username or password");
         
       }

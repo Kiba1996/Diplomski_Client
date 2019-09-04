@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-//import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import { TimetableModel } from 'src/app/model/timetableModel';
 import { DayTypeModel } from 'src/app/model/dayTypeModel';
@@ -34,7 +33,6 @@ export class TimetableService {
       base= this.httpClient.delete(`/api/${type}/`+ stId);
     }
 
-  
     return base;
   }
   public getAllTimetables(): Observable<any> {
@@ -56,29 +54,4 @@ export class TimetableService {
      return this.request('get','getAllDayTypes');
    }
 
-
-  // addTimetable(timetable): any{
-    
-  //   return this.httpClient.post(this.base_url+"/api/Timetables/Add",timetable);
-  // }
-
-  
-
-  // getAllTimetables() {
-  //   return this.httpClient.get(this.base_url+"/api/Timetables/GetTimetables");
-  // }
-
-  // getAllDayTypes() {
-  //   return this.httpClient.get(this.base_url+"/api/DayTypes/GetDayTypes");
-  // }
-
-  // deleteTimetable(id){
-    
-  //   return this.httpClient.delete(this.base_url+"/api/Timetables/Delete?id=" + id);
-  // }
-
-  // changeTimetable(id,timetable): Observable<any>{
-    
-  //   return this.httpClient.put(this.base_url+"/api/Timetables/Change?id=" + id,timetable);
-  // }
 }

@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-//import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { StationModel } from 'src/app/model/stationModel';
 
-//private http: Http,
 interface TokenResponse {
   token: string;
 }
@@ -37,20 +35,6 @@ export class StationService {
     else {
       base= this.httpClient.delete(`/api/${type}/`+ stId);
     }
-
-    // const request = base.pipe(
-    //   map((data: TokenResponse) => {
-    //     if (data.token) {
-    //       if( type === 'login')
-    //       {
-    //         this.saveToken(data.token);
-    //       }
-          
-    //     }
-    //     return data;
-    //   })
-    // );
-
     return base;
   }
   public getAllStations(): Observable<any> {
@@ -69,27 +53,6 @@ export class StationService {
     return this.request('delete', 'removeStation',null ,stId);   
   }
 
-  // addStation(station): Observable<any>{
-    
-  //   return this.httpClient.post(this.base_url+"/api/Stations/Add",station);
-  // }
-  // changeStation(station): Observable<any>{
-    
-  //   return this.httpClient.post(this.base_url+"/api/Stations/Change",station);
-  // }
-
-  // deleteStation(id){
-    
-  //   return this.httpClient.delete(this.base_url+"/api/Stations/Delete?id=" + id);
-  // }
-
-  // getAllStations() {
-  //   return this.httpClient.get(this.base_url+"/api/Stations/GetStations");
-  // }
-
-
  
-
-  
 
 }

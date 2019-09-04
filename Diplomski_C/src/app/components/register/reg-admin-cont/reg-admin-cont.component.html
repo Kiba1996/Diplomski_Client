@@ -2,7 +2,7 @@
 
     <form [formGroup]="registerForm" (ngSubmit)="Button1()">
       <fieldset class="ff">
-        <legend style="font-family: 'Gill Sans'; color: #5bd6cc; font-size: 40px; width:auto"> |  Register as admin/controller  | </legend>
+        <legend style="color: #ff9955; font-size: 40px; width:auto">   Register as admin/controller   </legend>
      
         <div class="form-group">
           <label class="lab">Choose role: </label>
@@ -83,7 +83,7 @@
             </div>
           </div>
           <br/>
-          <button  type="submit" [disabled]="registerForm.invalid" class="btn btn-primary btn-lg" >Register</button>
+          <button  type="submit" [disabled]="registerForm.invalid" class="btn" >Register</button>
         </fieldset>
       </form>
   </div> 

@@ -1,13 +1,15 @@
 <div class="container" style="text-align: center; width:70% ;">
-
+    <div *ngIf="empty != ''">
+        <h2  style=" color: #ff9955;">{{empty}}</h2>
+      </div>
   
     <div *ngIf="validPrices">
   
         <br/>
-        <h2  style=" color: #d7dfde;">~ Pricelist ~</h2>
+        <h2  style=" color: #ff9955;"> Pricelist </h2>
         <br/>
       
-        <label style="font-size: 20px; color:#5bd6cc">The price list is valid from  <b>{{pocDatum}}</b>  till  <b>{{endDatum}}</b></label>
+        <label style="font-size: 20px; color:#ff9955">Pricelist is valid from:   <b>{{pocDatum}}</b>  untill:   <b>{{endDatum}}</b></label>
         <br/>
         <br/>
   
@@ -43,16 +45,6 @@
         </tbody>
       </table>
   
-      
-        <!-- <label>Hourly ticket:</label>
-        <label>{{validPrices.Hourly}}</label> <br/>
-        <label>Daily ticket:</label>
-        <label>{{validPrices.Daily}}</label> <br/>
-        <label>Monthly ticket:</label>
-        <label>{{validPrices.Monthly}}</label> <br/>
-        <label>Yearly ticket:</label>
-        <label>{{validPrices.Yearly}}</label> <br/> -->
-        
       </div>
     </div>
    

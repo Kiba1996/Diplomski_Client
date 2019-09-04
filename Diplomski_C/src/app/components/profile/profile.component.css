@@ -5,13 +5,11 @@
   
 
 .naz {
-    color: #5bd6cc;
-    font-family: 'Gill Sans';
+    color: #ff9955;
     font-size: 30px;
 }
 .prof {
-    color: #b5dbd8;
-    font-family: 'Gill Sans';
+    color: #f3b287;
     font-size: 30px;
 }
 
@@ -22,7 +20,25 @@
 small {
 display: block;
 line-height: 1.428571429;
-color: rgb(59, 65, 66);
+color: #ff9955;
 font-size: 30px; 
-font-family: 'Gill Sans';
 }
+
+.container{
+    color: #ff9955;
+}
+
+.btn{
+    background-color: #ff9955;
+    color: rgb(255, 255, 255);
+    border:  #ff9955;
+    font-size: 20px;
+}
+
+
+.btn:hover, .btn-:focus, .btn:active, .btn.active, .open .dropdown-toggle.btn {
+ 
+    background-color: #f5731c;
+    border-color: #f5731c;
+     
+    }

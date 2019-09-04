@@ -8,7 +8,6 @@ import { StationModel } from 'src/app/model/stationModel';
 import { NgForm } from '@angular/forms';
 import { LineModel } from 'src/app/model/lineModel';
 import { LineServiceService } from 'src/app/services/lines/line.service';
-//import { AddLinesValidation } from 'src/app/models/Validation/validationModels';
 import { element } from 'protractor';
 
 
@@ -23,10 +22,10 @@ export class AddChangeLinesComponent implements OnInit {
   directionsService :any ;
   directionsDisplay : any ;
   public polyline: Polyline;
-  sl: LineModel = new LineModel(0,"",[],"");
-  selektovanaLinijaZaIzmenu: any;// LineModel = new LineModel(0,"",[],"");
+  sl: LineModel = new LineModel(0,"",[],"","",0);
+  selektovanaLinijaZaIzmenu: any;
   selLine: Polyline;
-  id: String; //number
+  id: String; 
   idForRemove: number;
   selectedL: string = "none";
   selected: string = "";
@@ -47,7 +46,6 @@ export class AddChangeLinesComponent implements OnInit {
   visibleLine : boolean = true;
   linesWihtStations : LineModel[] = [];
   iconPath : any = { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}}
-  //validations: AddLinesValidation = new AddLinesValidation();
 
   errorForListStat:string = "";
   
@@ -63,7 +61,7 @@ export class AddChangeLinesComponent implements OnInit {
       this.lineServ.getAllLines().subscribe(data => {
         this.allLines = data;
         this.linesWihtStations = [];
-        let lin = new LineModel(0,"",[],"")
+        let lin = new LineModel(0,"",[],"","",0)
         this.allLines.forEach(element => {
 
          
@@ -72,8 +70,9 @@ export class AddChangeLinesComponent implements OnInit {
           lin.Id = element._id;
           
           lin.Stations = this.findStations(element.stations);
+          lin.Version = element.__v;
           this.linesWihtStations.push(lin);
-          lin = new LineModel(0,"",[],"");
+          lin =  new LineModel(0,"",[],"","",0)
         });
         
         console.log("data: ",data);
@@ -88,8 +87,6 @@ export class AddChangeLinesComponent implements OnInit {
     this.polyline = new Polyline([], 'blue', { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}});
     this.selLine = new Polyline([], 'red', { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}});
 
-    // this.directionsService  = new google.maps.DirectionsService();
-    // this.directionsDisplay = new google.maps.DirectionsRenderer();
 
     this.mapsApiLoader.load().then(() =>{
       google.maps.event.addListener(this.sl, 'positionChanged', (function(selLine, i) {
@@ -151,7 +148,7 @@ export class AddChangeLinesComponent implements OnInit {
     {
       this.sl = new LineModel(0,"",[],"");
       this.selLine = new Polyline([], 'red', { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}});
-      this.selektovanaLinijaZaIzmenu = new LineModel(0,"",[],"");
+      this.selektovanaLinijaZaIzmenu = new LineModel(0,"",[],"","",0);
       this.idForRemove = 0;
       this.directionsDisplay.setMap(null);
     }
@@ -159,7 +156,7 @@ export class AddChangeLinesComponent implements OnInit {
     {
       this.directionsDisplay.setMap(null);
       this.visibleLine = false;
-      this.selektovanaLinijaZaIzmenu = new LineModel(0,"",[],"");
+      this.selektovanaLinijaZaIzmenu = new LineModel(0,"",[],"","",0);
       this.selLine = new Polyline([], 'red', { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}});
       this.linesWihtStations.forEach(x => {
         if(x.LineNumber == this.selectedL)
@@ -188,8 +185,8 @@ export class AddChangeLinesComponent implements OnInit {
   setradio(e: string): void   
   {  
     this.visibleLine = false;
-    this.selektovanaLinijaZaIzmenu = new LineModel(0,"",[],"");
-    this.sl = new LineModel(0,"",[],"");
+    this.selektovanaLinijaZaIzmenu =  new LineModel(0,"",[],"","",0);
+    this.sl =  new LineModel(0,"",[],"","",0);
     this.LineSelected = "none";
     this.refresh();
         this.selected = e;  
@@ -225,7 +222,7 @@ export class AddChangeLinesComponent implements OnInit {
           this.refresh();
         },
         err => {
-          window.alert(err.error);
+          window.alert(err.error.message);
           form.reset();
           this.refresh();
         });
@@ -241,11 +238,6 @@ export class AddChangeLinesComponent implements OnInit {
         lineData.LineNumber = this.selektovanaLinijaZaIzmenu.LineNumber;
         lineData.Version = this.selektovanaLinijaZaIzmenu.Version;
         console.log(lineData);
-        // if(this.validations.validate(lineData)) {
-        //   this.refresh();
-        //   //form.reset();
-        //   return;
-        // }
         this.lineServ.changeLine(lineData,this.selektovanaLinijaZaIzmenu.Id.toString()).subscribe(data =>
           {
             window.alert("Line successfully changed!");
@@ -255,12 +247,9 @@ export class AddChangeLinesComponent implements OnInit {
             
           },
         err => {
-          window.alert(err.error);
+          window.alert(err.error.message);
           this.refresh();
-         
-  
         });
-  
         }
       }
       else if(this.selected == "Remove"){
@@ -271,18 +260,16 @@ export class AddChangeLinesComponent implements OnInit {
         this.lineServ.deleteLine(this.idForRemove.toString()).subscribe(data =>
           {
             window.alert("Line successfully removed!");
-            // ponovo kupi sve linije, osvezavanje
             form.reset();
             this.refresh();
           },
           err => {
-            window.alert(err.error);
+            window.alert(err.error.message);
             this.refresh();
           });
        
       }
       else{
-        console.log("lalallaa")
       }
     
    
@@ -325,7 +312,7 @@ export class AddChangeLinesComponent implements OnInit {
     
   }
 
-  stationClick1( id: number){  //dodavanje u liniju
+  stationClick1( id: number){
 
     this.stati.forEach(element => {
        if(element._id == id){
@@ -340,8 +327,8 @@ export class AddChangeLinesComponent implements OnInit {
   refresh()
   {
     this.polyline = new Polyline([], 'blue', { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}});
-    this.sl = new LineModel(0,"",[],"");
-    this.selektovanaLinijaZaIzmenu = new LineModel(0,"",[],"");
+    this.sl =  new LineModel(0,"",[],"","",0);
+    this.selektovanaLinijaZaIzmenu =  new LineModel(0,"",[],"","",0);
     this.selLine = new Polyline([], 'red', { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}});
     this.selectedL = "none";
     this.markerZaDodavanje = new StationModel("","", 0,0,0);
@@ -359,7 +346,7 @@ export class AddChangeLinesComponent implements OnInit {
     this.lineServ.getAllLines().subscribe(data => {
       this.allLines = data;
       this.linesWihtStations = [];
-      let lin = new LineModel(0,"",[],"")
+      let lin =  new LineModel(0,"",[],"","",0);
       this.allLines.forEach(element => {
 
        
@@ -367,8 +354,9 @@ export class AddChangeLinesComponent implements OnInit {
         lin.LineNumber = element.lineNumber;
         lin.Id = element._id;
         lin.Stations = this.findStations(element.stations);
+        lin.Version = element.__v;
         this.linesWihtStations.push(lin);
-        lin = new LineModel(0,"",[],"");
+        lin =  new LineModel(0,"",[],"","",0);
       });
       
       console.log("data: ",data);

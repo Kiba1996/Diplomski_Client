@@ -1,7 +1,7 @@
 <div class="container"  style="text-align: center; width:70% ">
 
     <br/>
-    <h2  style=" color: #d7dfde;">~ Buy a ticket ~</h2>
+    <h2  style=" color: #ff9955;"> Buy a ticket </h2>
   <br/>
 
   <div class="btn-group btn-group-toggle" style="width: 100%" data-toggle="buttons">
@@ -20,40 +20,32 @@
       <br/>
   </div>
 
-<!-- <div>
-  <select  name="ticketType"  (click)='SelectedTicketType1($event)' value = "0" ngModel>
-    <option value="0">None</option>
-    <option *ngFor="let ln of allTicketTypes" value={{ln.Id}} >{{ln.Name}}</option>
-  </select>
-</div> -->
 
-<div *ngIf="boolZaPrikazCena" style="border:2px solid  #5bd6cc">
-  <label style="color: #5bd6cc; font-size: 20px; margin-right:7px">Cena bez popusta: </label>
-  <label style="color: #d7dfde; font-size: 20px; ">{{price}} RSD</label><br/>
-  <label style="color: #5bd6cc; font-size: 20px; margin-right:7px">Popust: </label>
-  <label style="color: #d7dfde; font-size: 20px; ">{{discount}}%</label><br/>
-  <label style="color: #5bd6cc; font-size: 20px; margin-right:7px">Cena sa popustom:</label>
-  <label style="color: #d7dfde; font-size: 20px; ">{{priceWDiscount}} RSD</label><br/>
+<div *ngIf="boolZaPrikazCena" style="border:2px solid  #ff9955">
+  <label style="color: #ff9955; font-size: 20px; margin-right:7px">Cena bez popusta: </label>
+  <label style="color: #fad0b5; font-size: 20px; ">{{price}} RSD</label><br/>
+  <label style="color: #ff9955; font-size: 20px; margin-right:7px">Popust: </label>
+  <label style="color: #fad0b5; font-size: 20px; ">{{discount}}%</label><br/>
+  <label style="color: #fe9a57; font-size: 20px; margin-right:7px">Cena sa popustom:</label>
+  <label style="color: #fad0b5; font-size: 20px; ">{{priceWDiscount}} RSD</label><br/>
 </div>
 
 <div *ngIf="boolZaOtvaranjeForme">
   <form  #ticketBuyForm="ngForm" (ngSubmit)="submitEmail(ticketBuyForm.value, ticketBuyForm)">
     <div >
       <br/>
-      <label  style="color: #5bd6cc; font-size: 18px;">Enter the email to which you want the ticket to arrive!</label><br/>
-      <!-- <label style="color:red; font-size:15px">*If you don't enter an email, the card will be sent to the email used for payment.</label> -->
-      <br/>
+      <label  style="color: #fe9a57; font-size: 18px;">Enter the email to which you want the ticket to arrive!</label><br/>
+        <br/>
       
       <input required type="email" class="form-control" name="Email" placeholder="Email" [(ngModel)]="EmailForPay">
       
-      <button  type="submit" class="button btn-primary btn-sm" >Submit email address</button>
+      <button  type="submit" class="btn" >Submit email address</button>
     
     </div>
-<!-- <label style="color: #5bd6cc; font-size: 20px;" for="email">Email address:</label> -->
 
     <div *ngIf="mailZaSlanje != ''">
       <br/>
-      <label style="color: #5bd6cc; font-size: 18px;">Ticket will be sent to: </label><label style="color: #d7dfde; font-size: 18px;">{{mailZaSlanje}}</label>
+      <label style="color: #fe9a57; font-size: 18px;">Ticket will be sent to: </label><label style="color: #d7dfde; font-size: 18px;">{{mailZaSlanje}}</label>
     </div>
   </form>
 </div>
